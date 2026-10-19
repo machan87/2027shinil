@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">교육과정 길라잡이</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --paper:#F4F6FB; --card:#fff; --soft:#FAFBFD;
+  --ink:#26303F; --ink2:#4A5666; --muted:#7C8899; --line:#E6EBF3;
+  --common:#5083CE; --major:#2FA189; --choice:#E2924A; --ncs:#C071A0; --extra:#8E9AAB;
+  --g1:#3FB08F; --g2:#6C9BE0; --g3:#A98BD6;
+  --sh1:0 1px 2px rgba(38,48,63,.04);
+  --sh2:0 4px 16px rgba(38,48,63,.07);
+  --sh3:0 12px 34px rgba(38,48,63,.11);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:17.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;text-align:left}
+:focus-visible{outline:3px solid #F5C36B;outline-offset:2px;border-radius:8px}
+.link{font-weight:600;color:var(--common);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
+
+/* shell */
+.top{position:sticky;top:0;z-index:40;background:rgba(244,246,251,.9);backdrop-filter:blur(10px)}
+.top .in{max-width:1320px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700}
+.brand .mk{width:26px;height:26px;border-radius:9px;background:linear-gradient(140deg,var(--g1),var(--g2));flex:none}
+.brand b{font-size:19px;letter-spacing:-.02em}
+.brand span{font-size:14px;color:var(--muted);font-weight:500}
+.top nav{margin-left:auto;display:flex;gap:5px}
+.top nav button{padding:9px 17px;border-radius:999px;font-size:15px;font-weight:600;color:var(--ink2);background:#fff;box-shadow:var(--sh1)}
+.top nav button:hover{box-shadow:var(--sh2)}
+.top nav button.on{background:var(--ink);color:#fff}
+
+main{max-width:1320px;margin:0 auto;padding:24px 16px 104px}
+.crumb{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
+.crumb button{font-weight:600;color:var(--ink2)}
+.crumb button:hover{color:var(--common)}
+.crumb i{font-style:normal;opacity:.45}
+
+h1{font-size:clamp(32px,4.4vw,52px);line-height:1.18;letter-spacing:-.04em;font-weight:800;margin:0 0 12px}
+h2{font-size:26px;letter-spacing:-.03em;font-weight:800;margin:40px 0 14px}
+h3{font-size:19px;font-weight:700;margin:0 0 9px;letter-spacing:-.025em}
+p.lead{color:var(--ink2);max-width:62ch;margin:0 0 28px;font-size:19.5px;line-height:1.6}
+p.eyebrow{margin:0 0 8px;font-size:16px;font-weight:700;color:var(--common);letter-spacing:-.01em}
+
+/* home */
+.grades{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.gcard{background:var(--card);border-radius:24px;padding:26px 24px 22px;box-shadow:var(--sh2);display:flex;flex-direction:column;
+  transition:transform .18s ease,box-shadow .18s ease}
+.gcard:hover{transform:translateY(-3px);box-shadow:var(--sh3)}
+.gcard .badge{width:58px;height:58px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  font-size:25px;font-weight:800;color:#fff;letter-spacing:-.04em;margin-bottom:16px}
+.gcard .n{font-size:27px;font-weight:800;letter-spacing:-.035em;line-height:1.2}
+.gcard .sub{font-size:15.5px;color:var(--muted);margin-top:2px}
+.gcard .map{margin-top:16px;padding:12px 15px;border-radius:14px;background:var(--soft);font-size:15.5px;color:var(--ink2)}
+.gcard .map b{color:var(--ink)}
+.gcard .depts{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:14px;font-weight:600;padding:5px 12px;border-radius:999px;background:#EEF2F9;color:var(--ink2)}
+
+.facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(155px,1fr))}
+.fact{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--sh1)}
+.fact .v{font-size:30px;font-weight:800;letter-spacing:-.035em;line-height:1.2}
+.fact .k{font-size:15px;color:var(--muted);margin-top:3px}
+
+.tip{background:#FFF7EC;border-radius:18px;padding:17px 20px;font-size:16px;color:#7A5620;margin:16px 0}
+.tip b{color:#5C3E12}
+
+/* dept list */
+.dgroup{margin-bottom:30px}
+.dgroup .hd{margin-bottom:12px}
+.dgroup .hd h3{margin:0;font-size:21px}
+.dgroup .hd small{color:var(--muted);font-size:13.5px}
+.dlist{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.dcard{background:var(--card);border-radius:20px;padding:20px;box-shadow:var(--sh1);transition:transform .16s,box-shadow .16s}
+.dcard:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.dcard .t{font-weight:800;font-size:20px;letter-spacing:-.025em}
+.dcard .c{font-size:15px;color:var(--muted);margin-top:3px}
+.dcard .meta{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--ink2)}
+
+/* tabs */
+.tabs{display:flex;gap:6px;margin:20px 0 22px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{padding:10px 18px;border-radius:999px;font-size:16px;font-weight:600;color:var(--ink2);white-space:nowrap;background:#fff;box-shadow:var(--sh1)}
+.tabs button.on{background:var(--ink);color:#fff}
+
+.panel{background:var(--card);border-radius:20px;padding:24px;margin-bottom:16px;box-shadow:var(--sh1)}
+.panel>h3:first-child{margin-top:0}
+.hint{font-size:15.5px;color:var(--muted);margin:0 0 16px;max-width:66ch}
+
+/* credit stack */
+.stack{display:flex;height:44px;border-radius:12px;overflow:hidden}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:14.5px;font-weight:700}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:15px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:7px}
+.dot{width:10px;height:10px;border-radius:4px}
+
+/* semesters */
+.sems{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+.sem{background:var(--soft);border-radius:18px;padding:14px}
+.sem .hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.sem .hd b{font-size:16px;letter-spacing:-.02em}
+.sem .hd em{font-style:normal;font-size:14px;font-weight:700;color:var(--muted)}
+.sub{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:11px;background:#fff;margin-bottom:6px;
+  font-size:15px;line-height:1.4;width:100%;box-shadow:var(--sh1);transition:transform .12s}
+.sub:hover{transform:translateX(2px)}
+.sub .tick{width:4px;align-self:stretch;border-radius:3px;flex:none;min-height:20px}
+.sub .cr{margin-left:auto;font-weight:700;font-size:14px;color:var(--muted);flex:none}
+.sub.pick{background:#FFF8EE}
+
+/* table */
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.tools input{border:0;border-radius:12px;padding:12px 16px;font:inherit;font-size:16px;min-width:200px;flex:1;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
+.tools input:focus{box-shadow:inset 0 0 0 2px var(--common);outline:none}
+.chip{font-size:15px;font-weight:600;padding:9px 15px;border-radius:999px;background:var(--soft);color:var(--ink2)}
+.chip.on{background:var(--ink);color:#fff}
+.tw{overflow-x:auto;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:760px}
+th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+thead th{background:var(--soft);font-size:13.5px;font-weight:700;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--line)}
+td.num,th.num{text-align:center;width:52px}
+tr.grp td{background:#F2F5FA;font-weight:700;font-size:14.5px}
+tr.row:hover td{background:#FAFCFF}
+.namebtn{font-weight:600;color:var(--ink);border-bottom:1px dashed var(--line)}
+.namebtn:hover{color:var(--common);border-color:var(--common)}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;color:#fff}
+
+/* options */
+.opts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(275px,1fr))}
+.opt{background:#fff;border-radius:20px;padding:18px;box-shadow:inset 0 0 0 1.5px var(--line);transition:box-shadow .16s,transform .16s}
+.opt:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1.5px #C9D6E6,var(--sh2)}
+.opt.on{box-shadow:inset 0 0 0 2px var(--choice),0 6px 20px rgba(226,146,74,.18)}
+.opt .t{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+.opt .mark{width:19px;height:19px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--line);flex:none}
+.opt.on .mark{background:var(--choice);box-shadow:inset 0 0 0 3.5px #fff,0 0 0 2px var(--choice)}
+.opt ul{margin:13px 0 0;padding:0;list-style:none;font-size:15px}
+.opt li{display:flex;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.opt li b{margin-left:auto;font-weight:700;color:var(--muted);flex:none}
+.opt .foot{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+
+.tray{position:sticky;bottom:0;z-index:30;margin:24px -20px -100px;padding:14px 20px 22px;
+  background:linear-gradient(180deg,rgba(244,246,251,0),var(--paper) 26%)}
+.tray .in{background:var(--ink);color:#fff;border-radius:20px;padding:16px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:var(--sh3)}
+.tray b{font-size:17px}
+.tray .s{font-size:15px;opacity:.8;margin-top:2px}
+.tray .act{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.tray .act button{background:rgba(255,255,255,.15);color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;font-weight:600}
+.tray .act button:hover{background:rgba(255,255,255,.26)}
+
+/* glossary */
+.terms{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.term{background:var(--card);border-radius:20px;padding:20px;box-shadow:var(--sh1)}
+.term h3{font-size:18px;margin-bottom:7px}
+.term p{margin:0;font-size:16px;color:var(--ink2)}
+.term p+p{margin-top:9px;color:var(--muted)}
+
+/* subject sheet */
+.scrim{position:fixed;inset:0;background:rgba(38,48,63,.35);z-index:60;display:flex;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(2px)}
+.sheet{background:#fff;width:100%;max-width:620px;border-radius:26px 26px 0 0;padding:24px 24px 30px;max-height:82vh;overflow:auto;
+  box-shadow:var(--sh3);animation:up .22s ease}
+@keyframes up{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+.sheet .close{position:absolute;top:14px;right:16px}
+.sheet .kicker{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.sheet h3{font-size:25px;letter-spacing:-.03em;margin-bottom:10px}
+.sheet .body{font-size:17px;color:var(--ink2);line-height:1.7}
+.sheet .body p{margin:0 0 10px}
+.sheet .meta{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:15.5px;color:var(--muted)}
+.sheet .units{margin:12px 0 0;padding:0;list-style:none}
+.sheet .units li{padding:10px 13px;border-radius:12px;background:var(--soft);margin-bottom:6px;font-size:15.5px;display:flex;gap:10px}
+.sheet .units li span{margin-left:auto;font-size:12px;color:var(--muted);flex:none}
+.sheetbtn{margin-top:20px;width:100%;text-align:center;background:var(--ink);color:#fff;padding:13px;border-radius:14px;font-weight:700}
+@media (min-width:640px){
+  .scrim{align-items:center}
+  .sheet{border-radius:26px;max-height:78vh}
+}
+
+/* 골라야 할 게 있다는 안내 */
+.callout{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#FFF3E2;border-radius:20px;
+  padding:18px 22px;margin:0 0 20px;box-shadow:inset 0 0 0 2.5px #EFC286}
+.callout .ic{width:46px;height:46px;border-radius:15px;background:var(--choice);color:#fff;flex:none;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:21px}
+.callout .tx b{display:block;font-size:19px;color:#7A5620;letter-spacing:-.02em}
+.callout .tx span{font-size:15.5px;color:#946B2A}
+.callout .cta{margin-left:auto;background:var(--choice);color:#fff;padding:14px 24px;border-radius:14px;
+  font-weight:700;font-size:16.5px;white-space:nowrap;box-shadow:var(--sh2)}
+.callout .cta:hover{filter:brightness(.94)}
+.callout.done{background:#EAF7F1;box-shadow:inset 0 0 0 2.5px #A5DBC5}
+.callout.done .ic,.callout.done .cta{background:var(--major)}
+.callout.done .tx b{color:#1B6B54} .callout.done .tx span{color:#2E8268}
+.callout.shut{background:#F1F4F9;box-shadow:inset 0 0 0 2.5px #D5DDE8}
+.callout.shut .ic,.callout.shut .cta{background:var(--extra)}
+.callout.shut .tx b{color:var(--ink)} .callout.shut .tx span{color:var(--muted)}
+@media (max-width:560px){ .callout .cta{margin-left:0;width:100%;text-align:center} }
+
+.tabs button.alert{background:var(--choice);color:#fff}
+.tabs button.alert .tag{background:rgba(255,255,255,.28)!important}
+.panel.todo{box-shadow:inset 0 0 0 2.5px #EFC286}
+.panel.picked{box-shadow:inset 0 0 0 2.5px #A5DBC5}
+.steptag{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;color:#8A5A17;
+  background:#FFF3E2;padding:5px 13px;border-radius:999px;margin-bottom:11px}
+.panel.picked .steptag{color:#1B6B54;background:#EAF7F1}
+.dcard .go{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--choice);color:#fff;
+  padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px}
+.dcard .go.done{background:var(--major)}
+
+/* 제출 폼 */
+.fstep{display:flex;gap:13px;align-items:center;margin:26px 0 12px}
+.fstep:first-of-type{margin-top:6px}
+.fstep .no{width:32px;height:32px;border-radius:50%;background:#C9D3E0;color:#fff;flex:none;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.fstep .ttl{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.fstep .ttl em{font-style:normal;font-size:14.5px;font-weight:600;color:#A56A15;margin-left:8px}
+.fstep.ok .no{background:var(--major)}
+.fstep.ok .ttl em{color:var(--major)}
+.field{border-radius:16px;padding:16px;background:#FFF9F0;box-shadow:inset 0 0 0 2.5px #EFC286}
+.field.ok{background:transparent;box-shadow:none;padding:0}
+.miss{margin:16px 0 0;border-radius:14px;background:#FFF3E2;padding:14px 17px;font-size:15.5px;color:#8A5A17;font-weight:600}
+.miss.ok{display:none}
+.locked{background:#F1F4F9;border-radius:18px;padding:17px 20px;font-size:16px;color:var(--ink2);margin-bottom:16px}
+.locked b{color:var(--ink)}
+.form label{display:block;font-size:15px;font-weight:700;color:var(--ink2);margin:0 0 6px}
+.frow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:18px}
+.form input[type=text]{width:100%;border:0;border-radius:12px;padding:14px 16px;font:inherit;font-size:17.5px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
+.form input[type=text]:focus{box-shadow:inset 0 0 0 2px var(--common);outline:none}
+.agree{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;border-radius:14px;background:var(--soft);margin-bottom:10px;cursor:pointer;font-size:16px;line-height:1.6}
+.agree input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--major);cursor:pointer}
+.sigbox{border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);position:relative;overflow:hidden}
+.sigbox canvas{display:block;width:100%;height:160px;touch-action:none;cursor:crosshair}
+.sigbox .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#B9C4D3;font-size:14px;pointer-events:none}
+.sigbox .ph.hide{display:none}
+.sigbar{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:13px;color:var(--muted)}
+.big{width:100%;text-align:center;padding:18px;border-radius:16px;font-size:18px;font-weight:700;background:var(--major);color:#fff;margin-top:20px;box-shadow:var(--sh2)}
+.big[disabled]{background:#D5DDE8;color:#8C99AA;cursor:not-allowed;box-shadow:none}
+.big.ghost{background:#fff;color:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--line);font-size:16.5px;padding:15px}
+
+/* 제출 확인서 */
+.receipt{border-radius:20px;background:#fff;padding:28px;box-shadow:var(--sh1)}
+.receipt .rh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;
+  padding-bottom:18px;margin-bottom:18px;border-bottom:2px solid var(--ink)}
+.receipt .rh h3{font-size:26px;margin:0;letter-spacing:-.03em}
+.receipt .rh .st{font-size:15px;color:var(--muted);margin-top:4px}
+.receipt .stamp{font-size:12.5px;font-weight:700;color:#fff;background:var(--major);padding:6px 13px;border-radius:999px;white-space:nowrap}
+.receipt dl{display:grid;grid-template-columns:auto 1fr;gap:11px 20px;margin:0 0 20px;font-size:17px}
+.receipt dt{font-weight:700;color:var(--muted);font-size:15.5px}
+.receipt dd{margin:0}
+.receipt .picked{border-radius:14px;background:var(--soft);padding:15px 17px;margin-bottom:18px}
+.receipt .picked .one{padding:9px 0;font-size:16.5px}
+.receipt .picked .one+.one{border-top:1px solid var(--line)}
+.receipt .picked small{display:block;color:var(--muted);font-size:14.5px;margin-top:2px}
+.receipt .pledge{font-size:15.5px;color:var(--ink2);line-height:1.75;padding:15px 17px;border-radius:14px;background:#FFF7EC;margin-bottom:18px}
+.receipt .pledge div{display:flex;gap:8px}
+.receipt .pledge i{font-style:normal;color:var(--major);font-weight:800}
+.receipt .sign{display:flex;justify-content:flex-end;align-items:flex-end;gap:14px;padding-top:14px;border-top:1px solid var(--line)}
+.receipt .sign .lab{font-size:15.5px;color:var(--muted);padding-bottom:8px}
+.receipt .sign img{height:74px;max-width:220px;object-fit:contain}
+@media print{
+  .receipt{box-shadow:none;border:1.5px solid #333;padding:24px}
+  .rprint{display:none}
+}
+
+footer{margin-top:44px;padding:24px 16px 44px;font-size:15px;color:var(--muted)}
+footer .in{max-width:1320px;margin:0 auto;border-top:1px solid var(--line);padding-top:20px}
+
+@media (max-width:640px){
+  main{padding:18px 12px 104px}
+  .panel{padding:16px 14px}
+  .tray{margin:24px -12px -104px;padding:12px}
+  .gcard{padding:22px 18px}
+  h1{font-size:clamp(28px,7.5vw,36px)}
+  h2{font-size:23px}
+  p.lead{font-size:18px}
+  body{font-size:17px}
+}
+@media print{.top,.tabs,.tray,footer,.tools,.scrim{display:none}body{background:#fff}.panel{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="brand"><i class="mk"></i><b id="brandName"></b><span id="brandSchool"></span></div>
+  <nav>
+    <button data-nav="home">학년별 안내</button>
+    <button data-nav="glossary">용어 사전</button>
+  </nav>
+</div></header>
+<main id="app"></main>
+<div id="sheet"></div>
+<footer><div class="in">
+  <div id="footSchool"></div>
+  <div style="margin-top:6px">학교의 <b>교육과정 편제 및 학점배당표</b>를 바탕으로 만든 안내 페이지예요. 과목 설명은 이해를 돕기 위한 안내이며, 실제 학사 운영 및 시간표는 학교 안내를 따라 주세요.</div>
+</div></footer>
+<script>
+/* ===========================================================
+   과목 설명 — 학교에서 자유롭게 고쳐 쓰세요.
+   "과목명": ["한 줄 소개", "이런 사람에게 잘 맞아요(선택)"]
+   =========================================================== */
+const DESC = {
+/* --- 보통교과 · 공통과목 --- */
+"공통국어1":["읽기·쓰기·듣기·말하기의 기본기를 다지고 문학과 문법을 함께 배워요.","1학년 1학기에 모두가 들어요."],
+"공통국어2":["1학기에 익힌 국어 기본기를 이어서, 더 긴 글을 읽고 써봐요."],
+"공통수학1":["중학교 수학을 이어받아 방정식, 부등식, 도형, 함수의 기초를 다져요."],
+"공통수학2":["집합과 명제, 함수, 경우의 수까지. 수학의 언어에 익숙해지는 시간이에요."],
+"공통영어1":["듣기·말하기·읽기·쓰기를 고루 다루며 영어 기본기를 만들어요."],
+"공통영어2":["조금 더 긴 글과 대화를 다루면서 실제로 쓸 수 있는 영어로 넓혀요."],
+"한국사1":["선사시대부터 조선 후기까지, 우리 역사의 큰 줄기를 따라가요."],
+"한국사2":["개항 이후부터 오늘까지. 지금 우리 사회가 어떻게 만들어졌는지 살펴봐요."],
+"통합사회1":["행복, 자연환경, 생활공간, 인권, 시장처럼 삶과 맞닿은 주제로 사회를 봐요."],
+"통합사회2":["문화, 세계화, 정의, 미래 사회 문제를 여러 관점에서 이야기해요."],
+"통합과학1":["물질과 규칙성, 시스템과 상호작용. 과학의 기본 개념을 통합해서 배워요."],
+"통합과학2":["변화와 다양성, 환경과 에너지. 과학이 우리 삶과 만나는 지점을 다뤄요."],
+
+/* --- 보통교과 · 선택과목 --- */
+"문학":["시, 소설, 수필, 극을 읽고 해석하면서 내 생각을 글로 정리해요."],
+"대수":["지수와 로그, 삼각함수, 수열. 함수를 한 단계 깊이 다뤄요."],
+"영어Ⅰ":["공통영어보다 한 걸음 더. 긴 글을 읽고 자기 생각을 영어로 말해봐요."],
+"체육1":["여러 종목을 직접 해보며 체력을 기르고 함께 하는 법을 배워요."],
+"체육2":["1학기에 이어 새로운 종목에 도전해요."],
+"운동과 건강":["내 몸에 맞는 운동을 스스로 계획하고 꾸준히 이어가는 법을 배워요."],
+"스포츠 과학":["운동을 과학으로 봐요. 몸의 움직임, 훈련 원리, 경기 분석까지."],
+"스포츠 생활1":["평생 즐길 수 있는 스포츠를 골라 실제로 참여해요."],
+"스포츠 생활2":["관심 있는 종목을 더 깊이 즐기고, 경기 문화도 함께 이해해요."],
+"음악":["노래하고 연주하고 감상하면서 음악을 즐기는 법을 익혀요."],
+"디자인과 생활":["일상 속 디자인을 보는 눈을 기르고 간단한 디자인을 직접 만들어봐요."],
+"정보":["문제를 컴퓨터로 푸는 방법. 자료 구조, 알고리즘, 프로그래밍 기초를 배워요."],
+"정보 처리와 관리":["데이터를 모으고 정리하고 관리해요. 스프레드시트와 데이터베이스를 다뤄요."],
+"중국어":["발음부터 시작해 기본 회화와 한자를 익혀요."],
+"보건":["건강, 안전, 응급처치, 마음 건강까지 실제로 필요한 것들을 배워요."],
+"인간과 심리":["사람의 마음이 어떻게 움직이는지 — 성격, 관계, 스트레스를 다뤄요."],
+"독서와 작문":["여러 종류의 글을 읽고 목적에 맞게 써요.","자기소개서나 대학 진학을 준비한다면 도움이 커요."],
+"영어 독해와 작문":["긴 영어 글을 읽고 요약하고, 내 생각을 영어 문장으로 만들어봐요.","영어를 계속 붙잡고 가고 싶다면 좋아요."],
+"확률과 통계":["경우의 수와 확률, 자료 해석을 배워요.","데이터를 다루는 일이나 이공계 진학과 잘 이어져요."],
+"세계시민과 지리":["세계 여러 지역의 자연과 사람, 지구촌이 함께 겪는 문제를 지리로 봐요."],
+"세계사":["세계 역사의 큰 흐름을 따라가며 지금의 세계를 이해해요."],
+"여행지리":["여행이라는 창으로 지리를 봐요. 지역의 자연과 문화, 여행 계획까지.","관광·서비스 분야에 관심이 있다면 재밌게 들을 수 있어요."],
+"융합과학 탐구":["궁금한 과학 주제를 직접 정해 조사하고 실험하고 발표해요."],
+
+/* --- 전문교과 · 전문공통 --- */
+"성공적인 직업 생활":["취업 준비부터 직장에서의 소통, 예절, 경력 관리까지 다뤄요.","직업계고 학생이라면 모두 들어요."],
+"노동 인권과 산업 안전 보건":["근로계약과 임금, 일하는 사람의 권리, 안전하게 일하는 방법을 배워요."],
+
+/* --- 경영·금융 --- */
+"상업 경제":["경제가 어떻게 돌아가는지, 기업과 시장의 기본 원리를 배워요."],
+"회계 원리":["돈의 흐름을 기록하는 규칙. 분개에서 시작해 재무제표까지 만들어봐요."],
+"회계 정보 처리 시스템":["회계 프로그램으로 실제 장부를 처리해요.","전산회계 자격증과 바로 이어져요."],
+"금융 일반":["예금, 대출, 보험, 투자. 금융상품과 금융기관이 어떻게 움직이는지 봐요."],
+"기업과 경영":["기업이 어떻게 세워지고 굴러가는지 — 조직, 인사, 전략을 배워요."],
+"기업 자원 통합 관리":["ERP로 회사의 재무·구매·재고·인사 자료를 한곳에서 관리해요."],
+"비즈니스 커뮤니케이션":["업무 메일, 보고, 협상, 발표. 일할 때 쓰는 말과 글을 연습해요."],
+"마케팅과 광고":["고객을 이해하고 상품을 알리는 방법을 배워요."],
+"무역 일반":["나라 사이 거래의 기본. 무역 절차, 계약, 대금 결제를 다뤄요."],
+"유통 일반":["상품이 만들어진 곳에서 소비자에게 오기까지의 길을 살펴봐요."],
+"창업 일반":["아이디어를 사업으로 만드는 과정 — 아이템 발굴, 사업계획서, 자금."],
+
+/* --- 정보·통신 --- */
+"인공지능 기초":["AI가 어떻게 배우는지 알아보고 간단한 모델을 직접 만들어봐요."],
+"프로그래밍":["코드를 직접 짜면서 문제를 해결해요."],
+
+/* --- 문화·예술·디자인·방송 --- */
+"디자인 일반":["디자인의 원리와 흐름, 어떤 분야들이 있는지 넓게 살펴봐요."],
+"색채 일반":["색이 주는 느낌과 배색 규칙을 배워요."],
+"조형":["점·선·면·형태·질감 같은 조형 요소를 손으로 익혀요."],
+"컴퓨터 그래픽":["그래픽 프로그램으로 이미지를 만들고 다듬어요.","GTQ 같은 자격증과 이어져요."],
+"문화 콘텐츠 산업 일반":["웹툰·영상·게임 같은 콘텐츠 산업이 어떻게 돌아가는지 알아봐요."],
+"미디어 콘텐츠 일반":["미디어 콘텐츠가 기획되고 만들어지고 퍼지는 과정을 봐요."],
+"방송 일반":["방송이 만들어지는 과정과 방송 산업의 구조를 배워요."],
+"영상 제작 기초":["촬영, 조명, 편집의 기본을 직접 해보며 익혀요."],
+"애니메이션 기초":["움직임의 원리와 애니메이션이 만들어지는 단계를 배워요."],
+"연극":["무대 위 이야기가 어떻게 만들어지는지 배우고 직접 올려봐요."],
+"연기":["카메라와 무대 앞에서 표현하는 법을 연습해요.","방송·라이브 진행에 관심 있다면 도움이 돼요."],
+
+/* --- 보건간호 --- */
+"간호의 기초":["간호가 어떤 일인지, 어떤 자세와 지식이 필요한지 배워요."],
+"간호의기초 기본 실습":["간호의 기초에서 배운 내용을 실습실에서 직접 해봐요."],
+"인체 구조와 기능":["우리 몸이 어떻게 생겼고 어떻게 작동하는지 계통별로 배워요."],
+"인체구조와 기능 기본 실습":["몸의 구조와 기능을 모형과 실습으로 확인해요."],
+"기초 간호 임상 실무":["환자를 돌보는 현장에서 실제로 하는 일을 배워요."],
+"기초 간호 임상 실무 실습":["임상에서 하는 기본 간호 술기를 반복해서 익혀요."],
+"기초간호임상실무 실습":["임상에서 하는 기본 간호 술기를 반복해서 익혀요."],
+"보건 간호":["지역사회와 학교, 산업 현장에서의 건강 관리를 다뤄요."],
+"공중 보건":["집단의 건강을 지키는 방법 — 감염병 관리, 환경, 보건 정책."],
+"보건 의료 법규":["의료 현장에서 지켜야 할 법과 제도를 알아봐요."],
+"의학용어":["의료 현장에서 쓰는 용어를 익혀요. 실습과 취업의 기본이에요."],
+"치과 간호 임상 실무":["치과에서 이뤄지는 진료와 간호 업무를 배워요."],
+
+/* --- 그 밖 --- */
+"반도체인프라 일반":["반도체를 만드는 데 필요한 설비와 환경을 이해해요."],
+
+/* --- 전공실무 (아래 능력단위 목록과 함께 봐요) --- */
+"사무 행정":["회사의 문서와 회의, 사무 프로그램을 다루는 일을 실제로 해봐요."],
+"총무":["회사가 돌아가도록 뒤에서 챙기는 일 — 자산, 행사, 문서 관리."],
+"창구 사무":["은행 창구에서 이뤄지는 업무를 실습해요."],
+"창구 사무↔총무":["창구 사무와 총무 가운데 학교가 편성한 과목을 이수해요."],
+"총무↔인사":["총무와 인사 가운데 학교가 편성한 과목을 이수해요."],
+"고객 관리":["고객의 정보를 관리하고 관계를 이어가는 방법을 익혀요."],
+"회계 실무":["전표부터 결산까지, 회계 업무를 순서대로 직접 처리해요."],
+"자재 관리":["필요한 물건을 들여오고 보관하고 내보내는 과정을 관리해요."],
+"구매 조달":["필요한 물품과 서비스를 찾아 계약하고 들여오는 일을 배워요."],
+"유통 관리":["상품이 창고에서 매장까지 흐르도록 관리하는 일을 해봐요."],
+"수출입 관리":["물건을 해외로 보내고 들여오는 절차와 서류를 다뤄요."],
+"전자 상거래 실무":["온라인 쇼핑몰을 만들고 운영하고 판매까지 해봐요."],
+"매장 판매":["매장에서 고객을 맞이하고 상품을 파는 과정을 실습해요."],
+"라이브 커머스":["실시간 방송으로 상품을 소개하고 파는 과정을 직접 해봐요."],
+"광고 콘텐츠 제작":["광고 아이디어를 잡고 실제 콘텐츠로 만들어요."],
+"식공간 연출":["음식이 놓이는 공간을 보기 좋고 편하게 꾸미는 일을 배워요."],
+"외식 마케팅":["음식점과 외식 브랜드를 알리고 손님을 모으는 방법을 다뤄요."],
+"제과":["과자와 디저트를 만드는 과정을 실습해요."],
+"제빵":["빵을 반죽하고 발효하고 굽는 과정을 실습해요."],
+"정보 보호 관리":["정보가 새어 나가지 않도록 지키는 방법을 배우고 직접 관리해봐요."],
+"빅 데이터 분석":["많은 데이터를 정리하고 분석해서 의미를 찾아내요."],
+"드론제작과 운용":["드론을 조립하고 실제로 띄워 조종해요."],
+"디지털 디자인":["디지털 도구로 결과물을 설계하고 만들어요."],
+"시각 디자인":["보는 사람에게 메시지를 전하는 디자인을 만들어요."],
+"편집 디자인":["글과 이미지를 배치해 읽기 좋은 인쇄물을 만들어요."],
+"색채 디자인":["색을 골라 배치하며 분위기를 만드는 작업을 해요."],
+"만화 콘텐츠 제작":["이야기를 짜고 캐릭터를 그려 만화로 완성해요."],
+"캐릭터 제작":["매력 있는 캐릭터를 기획하고 그려서 다듬어요."],
+"애니메이션 콘텐츠 제작":["움직이는 영상을 기획하고 제작해요."],
+"스마트 문화 앱 콘텐츠 제작":["앱에서 쓰이는 문화 콘텐츠를 기획하고 만들어요."],
+"방송 콘텐츠 제작":["기획부터 촬영, 편집까지 방송 콘텐츠를 직접 만들어요."],
+"요양 지원":["어르신의 일상생활을 돕는 일을 배우고 실습해요."],
+"영유아 건강·안전·영양 지도":["어린아이의 건강과 안전, 먹는 것을 돌보는 방법을 배워요."]
+};
+
+
+/* ===========================================================
+   학교 설정 — 해마다 이 부분만 고치면 돼요.
+   =========================================================== */
+const CONFIG = {
+  schoolYear: 2027,          // 다가오는 학년도
+
+  // 사이트 이름 — 앞에 학년도가 자동으로 붙어요. (예: "2027학년도 교육과정 길라잡이")
+  // 다른 안) "교육과정 안내" / "과목 선택 길라잡이" / "내 교육과정 찾기"
+  siteName: "교육과정 길라잡이",
+  brand: "교육과정 길라잡이",   // 화면 맨 위 작은 이름
+
+  deadline: "2026-11-30",    // 제출 마감일 (YYYY-MM-DD). 이 날 밤 12시까지 받아요.
+  today: null,               // 시험용으로 날짜를 바꿀 때만 "2026-10-05" 처럼 적어요.
+
+  // 어느 학년이 무엇을 고를지는 편제표에서 자동으로 계산해요.
+  // 내년에 올라갈 학년에 편성된 선택과목만 지금 고르게 돼요.
+  // 특정 학년만 받고 싶으면 [2,3] 처럼 직접 적으세요. null 이면 자동이에요.
+  submitGrades: null,
+
+  // 구글 시트로 제출을 모으려면 아래 두 줄을 채우세요. (설치법은 Apps Script 파일 참고)
+  // 비워 두면 확인서를 인쇄해서 내는 방식으로 동작해요.
+  sheetUrl: "",
+  secret: "shinil-2027"
+};
+
+const TODAY = CONFIG.today ? new Date(CONFIG.today+"T23:59:59") : new Date();
+const DEADLINE = new Date(CONFIG.deadline+"T23:59:59");
+const PAST_DUE = false;
+const fmtDate = d => d.getFullYear()+"년 "+(d.getMonth()+1)+"월 "+d.getDate()+"일";
+const fmtStamp = d => { const p=n=>String(n).padStart(2,"0");
+  return d.getFullYear()+"."+p(d.getMonth()+1)+"."+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes()); };
+
+const PACK = {"v":["\ubcf4\ud1b5\uad50\uacfc","","\uad6d\uc5b4","\uacf5\ud1b5","\uacf5\ud1b5\uad6d\uc5b41","3~4","\uacf5\ud1b5\uad6d\uc5b42","\uc77c\ubc18","\ubb38\ud559","3~5","\uc218\ud559","\uacf5\ud1b5\uc218\ud5591","\uacf5\ud1b5\uc218\ud5592","\ub300\uc218","\uc601\uc5b4","\uacf5\ud1b5\uc601\uc5b41","\uacf5\ud1b5\uc601\uc5b42","\uc601\uc5b4\u2160","\uc0ac\ud68c(\uc5ed\uc0ac/\ub3c4\ub355 \ud3ec\ud568)","\ud55c\uad6d\uc0ac1","3","\ud55c\uad6d\uc0ac2","\ud1b5\ud569\uc0ac\ud68c1","\ud1b5\ud569\uc0ac\ud68c2","\uacfc\ud559","\ud1b5\ud569\uacfc\ud5591","\ud1b5\ud569\uacfc\ud5592","\uccb4\uc721","\uccb4\uc7211","2~4","\uccb4\uc7212","\uc9c4\ub85c","\uc6b4\ub3d9\uacfc \uac74\uac15","\uc2a4\ud3ec\uce20 \uacfc\ud559","1~2","\uc735\ud569","\uc2a4\ud3ec\uce20 \uc0dd\ud65c1","\uc608\uc220","\uc74c\uc545","\ub514\uc790\uc778\uacfc \uc0dd\ud65c","\uae30\uc220\u00b7\uac00\uc815/ \uc815\ubcf4/ \uc81c2\uc678\uad6d\uc5b4 /\ud55c\ubb38","\uc815\ubcf4","\uc815\ubcf4 \ucc98\ub9ac\uc640 \uad00\ub9ac","\uc911\uad6d\uc5b4","\uc804\ubb38\uad50\uacfc (\uace0\uc2dc\uacfc\ubaa9)","\uc804\ubb38\uacf5\ud1b5","\uc131\uacf5\uc801\uc778 \uc9c1\uc5c5 \uc0dd\ud65c","2\uc774\uc0c1","\ub178\ub3d9 \uc778\uad8c\uacfc \uc0b0\uc5c5 \uc548\uc804 \ubcf4\uac74","\uacbd\uc601\u00b7\uae08\uc735","\uc804\uacf5\uc77c\ubc18","\uc0c1\uc5c5 \uacbd\uc81c","\ud68c\uacc4 \uc6d0\ub9ac","\ud68c\uacc4 \uc815\ubcf4 \ucc98\ub9ac \uc2dc\uc2a4\ud15c","\uae08\uc735 \uc77c\ubc18","\uae30\uc5c5\uacfc \uacbd\uc601","\uae30\uc5c5 \uc790\uc6d0 \ud1b5\ud569 \uad00\ub9ac","\uc815\ubcf4\u00b7\ud1b5\uc2e0","\uc778\uacf5\uc9c0\ub2a5 \uae30\ucd08","\ube44\uc988\ub2c8\uc2a4 \ucee4\ubba4\ub2c8\ucf00\uc774\uc158","\ud504\ub85c\uadf8\ub798\ubc0d","\uc804\uacf5\uc2e4\ubb34","\uace0\uac1d \uad00\ub9ac","\ucc3d\uad6c \uc0ac\ubb34","\ucd1d\ubb34","\uc0ac\ubb34 \ud589\uc815","\ube45 \ub370\uc774\ud130 \ubd84\uc11d","\uc804\ubb38\uad50\uacfc (\uace0\uc2dc\uc678\uacfc\ubaa9)","\uc804\uae30\u00b7\uc804\uc790","\ubc18\ub3c4\uccb4\uc778\ud504\ub77c \uc77c\ubc18","\ub4dc\ub860\uc81c\uc791\uacfc \uc6b4\uc6a9","\ud6c4\ud559\uc2b5 \uc9c0\uc6d0\ud615 (\ud0dd1)","\ub3c5\uc11c\uc640 \uc791\ubb38","\uc601\uc5b4 \ub3c5\ud574\uc640 \uc791\ubb38","\ud655\ub960\uacfc \ud1b5\uacc4","\uc0ac\ud68c","\uc5ec\ud589\uc9c0\ub9ac","\ubb38\ud654\u00b7\uc608\uc220\u00b7\ub514\uc790\uc778\u00b7\ubc29\uc1a1","\ucef4\ud4e8\ud130 \uadf8\ub798\ud53d","\ubd80\uc804\uacf5 (\ud0dd1)","\uc2a4\ud1a0\uc5b4\uae30\ud68d\uacfc \ubb3c\ub958\uc640 \uc804\uc790 \uc0c1\uac70\ub798 \uc2e4\ubb34 \uacfc\uc815","\uc790\uc7ac \uad00\ub9ac","\uc804\uc790 \uc0c1\uac70\ub798 \uc2e4\ubb34","\ud68c\uacc4 \uc2e4\ubb34","\uc218\ucd9c\uc785 \uad00\ub9ac","\ucd1d\ubb34\u2194\uc778\uc0ac","\uc2dc\uac01\ub514\uc790\uc778\uacfc \uc6f9\ud230 \ucf58\ud150\uce20 \uc81c\uc791 \uacfc\uc815","\uc870\ud615","\ubb38\ud654 \ucf58\ud150\uce20 \uc0b0\uc5c5 \uc77c\ubc18","\ub9cc\ud654 \ucf58\ud150\uce20 \uc81c\uc791","\uc2a4\ub9c8\ud2b8 \ubb38\ud654 \uc571 \ucf58\ud150\uce20 \uc81c\uc791","\ubaa8\uc158\uadf8\ub798\ud53d\ub514\uc790\uc778\uacfc \uc601\uc0c1 \ubbf8\ub514\uc5b4 \uc81c\uc791 \uacfc\uc815","\ubc29\uc1a1 \uc77c\ubc18","\ubbf8\ub514\uc5b4 \ucf58\ud150\uce20 \uc77c\ubc18","\ub514\uc9c0\ud138 \ub514\uc790\uc778","\uacf5\ub3d9\uad50\uc721\uacfc\uc815","\uad50\uc591","\uc778\uac04\uacfc \uc2ec\ub9ac","\ubb38\uc11c \uc791\uc131","\ubb38\uc11c \uad00\ub9ac","\ud68c\uc758 \uc6b4\uc601","\uc0ac\ubb34\uc790\ub3d9\ud654 \ud504\ub85c\uadf8\ub7a8 \ud65c\uc6a9","\uc5c5\ubb34 \uc9c0\uc6d0","\ucd1d\ubb34 \ubb38\uc11c \uad00\ub9ac","\uc608\uae08\uc0c1\ud488 \uc138\uc77c\uc988","\ucd9c\ub0a9\uad00\ub9ac","\uc785\uc9c0\uae09 \uac70\ub798","\ubd84\uc11d \ub370\uc774\ud130 \uc804\ucc98\ub9ac","\ub370\uc774\ud130 \ubd84\uc11d \uae30\ucd08 \uae30\uc220 \ud65c\uc6a9","\ube45 \ub370\uc774\ud130 \ubd84\uc11d \uacb0\uacfc \uc2dc\uac01\ud654","\ud0d0\uc0c9\uc801 \ub370\uc774\ud130 \ubd84\uc11d","\uace0\uac1d \ud544\uc694\uc815\ubcf4 \uc81c\uacf5","\uace0\uac1d \uad00\uacc4 \uad00\ub9ac","\uc790\uc7ac \uc785\uace0 \uad00\ub9ac","\uc790\uc7ac \ucc3d\uace0 \uc6b4\uc601 \uad00\ub9ac","\uc790\uc7ac\uc6b4\uc601\uad00\ub9ac","\uc790\uc7ac\ucd9c\uace0\uad00\ub9ac","\uc0ac\uc774\ud2b8 \uad6c\ucd95","\uc0ac\uc774\ud2b8 \uc6b4\uc601","\ud310\ub9e4\uad00\ub9ac","\uc0ac\ud6c4\uad00\ub9ac","\uc804\ud45c\uad00\ub9ac","\uc790\uae08\uad00\ub9ac","\uc6d0\uac00\uacc4\uc0b0","\uacb0\uc0b0\ucc98\ub9ac","\ub9cc\ud654 \uc791\ud488 \uae30\ud68d","\ub9cc\ud654 \uc2a4\ud1a0\ub9ac \uad6c\uc131","\ub9cc\ud654 \uce90\ub9ad\ud130 \ub514\uc790\uc778","\ub9cc\ud654 \ucf58\ud2f0\uc791\uc5c5","\ud504\ub85c\ud1a0\ud0c0\uc785 \uae30\ucd08\ub370\uc774\ud130 \uc218\uc9d1 \ubc0f \uc2a4\ucf00\uce58","\ub514\uc790\uc778 \uad6c\uc131\uc694\uc18c \uc124\uacc4","\ub514\uc790\uc778 \uad6c\uc131\uc694\uc18c \uc81c\uc791","\ud504\ub85c\uc81d\ud2b8 \uc644\ub8cc \uacb0\uacfc\ubcf4\uace0\uc11c \uc791\uc131","\uc2a4\ub9c8\ud2b8 \ubb38\ud654 \uc571 \ucf58\ud150\uce20 \uc124\uacc4","\uc2a4\ub9c8\ud2b8 \ubb38\ud654 \uc571 \ucf58\ud150\uce20 \uc11c\ube44\uc2a4 \uc6b4\uc601","\uc2a4\ub9c8\ud2b8 \ubb38\ud654 \uc571 \uc0ac\uc6a9\uc790 \uc870\uc0ac \ubd84\uc11d","\uc2a4\ub9c8\ud2b8 \ubb38\ud654 \uc571 \uad6c\ud604","\ubb34\uc5ed \uc77c\ubc18","\uc218\ucd9c\uc785\uad00\ub9ac","\uc218\ucd9c\uc785\uacc4\uc57d","\uc218\ucd9c\ud1b5\uad00","\uc218\uc785\ud1b5\uad00","\uc218\ucd9c\ub300\uae08\uacb0\uc81c","\uc218\uc785\ub300\uae08\uacb0\uc81c","\ucc3d\uc5c5 \uc77c\ubc18","\ub9c8\ucf00\ud305\uacfc \uad11\uace0","\uc720\ud1b5 \uc77c\ubc18","\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc \uad6d\uc81c \ubb34\uc5ed\uacfc \uacbd\uc601 \uc2e4\ubb34 \uacfc\uc815","\ucc3d\uad6c \uc0ac\ubb34\u2194\ucd1d\ubb34","\ub9e4\uc7a5 \ud310\ub9e4","\ud310\ub9e4 \uae30\ubcf8 \uc815\ubcf4 \ubd84\uc11d","\ub9e4\uc7a5 \uc601\uc5c5\uc804 \ud310\ub9e4 \uc9c0\uc6d0 \uc810\uac80","\ub9e4\uc7a5\ud310\ub9e4 \ub9c8\ubb34\ub9ac","\ub9e4\uc7a5\ud310\ub9e4\uc0c1\ub2f4","\ub514\uc790\uc778 \uc77c\ubc18","\uc0c9\ucc44 \uc77c\ubc18","\uce90\ub9ad\ud130 \uc81c\uc791","\uc2dc\uac01 \ub514\uc790\uc778","\uad11\uace0 \ucf58\ud150\uce20 \uc81c\uc791","\ud3b8\uc9d1 \ub514\uc790\uc778","\uc2ec\ud654/ \ubd80\uc804\uacf5 (\ud0dd1)","\uce90\ub9ad\ud130 \ucf58\uc149\ud2b8 \uc124\uc815","2D \uce90\ub9ad\ud130 \uc81c\uc791","\uce90\ub9ad\ud130 \uc751\uc6a9\ucf58\ud150\uce20 \uc801\uc6a9","\uce90\ub9ad\ud130 \ub9e4\ub274\uc5bc \uc81c\uc791","\ud06c\ub9ac\uc5d0\uc774\ud2f0\ube0c \uc804\ub7b5 \uc218\ub9bd","\ucd2c\uc601 \uc81c\uc791","\uc77c\ub7ec\uc2a4\ud2b8\ub808\uc774\uc158","\uc778\uc1c4 \ud3b8\uc9d1","\uc0ac\uc6b4\ub4dc \ub514\uc790\uc778","\uc601\uc0c1 CG \uc791\uc5c5","\ud3b8\uc9d1\ub514\uc790\uc778 \uc2dc\uc548\uc81c\uc791","\ud3b8\uc9d1\ub514\uc790\uc778 \uc791\uc5c5\uc2e4\ud589","\ud3b8\uc9d1\ub514\uc790\uc778 \uc18c\ud504\ud2b8\uc6e8\uc5b4 \ud65c\uc6a9","\uc0ac\uc9c4\uc774\ubbf8\uc9c0 \ud3b8\uc9d1\ub514\uc790\uc778","\ub4dc\ub85c\uc789 \uc774\ubbf8\uc9c0 \ud3b8\uc9d1\ub514\uc790\uc778","\ud3b8\uc9d1\ub514\uc790\uc778 \uc778\uc1c4\uac10\ub9ac","\uc2dc\uac01\ub514\uc790\uc778 \ud504\ub85c\uc81d\ud2b8 \uae30\ud68d","\uc2dc\uc548 \ub514\uc790\uc778 \uac1c\ubc1c \uc2ec\ud654","\ube44\uc8fc\uc5bc \uc544\uc774\ub370\uc774\uc158 \uc804\uac1c","\ube44\uc8fc\uc5bc \uc544\uc774\ub370\uc774\uc158 \uc801\uc6a9","\uc601\uc0c1 \uc81c\uc791 \uae30\ucd08","\uc560\ub2c8\uba54\uc774\uc158 \uae30\ucd08","\uc560\ub2c8\uba54\uc774\uc158 \ucf58\ud150\uce20 \uc81c\uc791","\uc2dc\ub189\uc2dc\uc2a4 \uad6c\uc131","\uce90\ub9ad\ud130 \ub514\uc790\uc778","\uc2a4\ud1a0\ub9ac\ubcf4\ub4dc \uc81c\uc791","2D \uc560\ub2c8\uba54\uc774\uc158 \ub808\uc774\uc544\uc6c3","2D \uc560\ub2c8\uba54\uc774\ud305","2D \uc560\ub2c8\uba54\uc774\uc158 \ucc44\uc0c9","\ubcf4\uac74\u00b7\ubcf5\uc9c0","\uc778\uccb4 \uad6c\uc870\uc640 \uae30\ub2a5","\uae30\ucd08 \uac04\ud638 \uc784\uc0c1 \uc2e4\ubb34","\uacf5\uc911 \ubcf4\uac74","\ubcf4\uac74 \uc758\ub8cc \ubc95\uaddc","\uc694\uc591 \uc9c0\uc6d0","\uac04\ud638\uc758 \uae30\ucd08","\ubcf4\uac74 \uac04\ud638","\uce58\uacfc \uac04\ud638 \uc784\uc0c1 \uc2e4\ubb34","\uc601\uc720\uc544 \uac74\uac15\u00b7\uc548\uc804\u00b7\uc601\uc591 \uc9c0\ub3c4","\uae30\ucd08\uac04\ud638\uc784\uc0c1\uc2e4\ubb34 \uc2e4\uc2b5","\ud559\uacfc \uc735\ud569 (\ud0dd1)","\ubcf4\uac74","\uc9c4\ub8cc\uc9c0\uc6d0\ubcf4\uc870","\ubb3c\ud488\uc804\ub2ec","\ud658\uc790\uc774\uc1a1\uc9c0\uc6d0","\uc77c\uc0c1\uc0dd\ud65c\uc218\ud589\uc9c0\uc6d0","\uc2e0\uccb4\uccad\uacb0\uc9c0\uc6d0","\uc624\uc5fc\ubb3c \ucc98\ub9ac","\uac74\uac15\uc9c0\ub3c4","\uc548\uc804\uc9c0\ub3c4","\uc601\uc591\uc9c0\ub3c4","\ube44\uc8fc\uc5bc \uc544\uc774\ub370\uc774\uc158 \uad6c\uc0c1","\uc2dc\uc548 \ub514\uc790\uc778 \uac1c\ubc1c \uae30\ucd08","\uc2dc\uc548 \ub514\uc790\uc778 \uac1c\ubc1c \uc751\uc6a9","\uc138\ubd80\uc804\uacf5 \ucf54\uc2a4\ud615 / \ud0c0\ud559\uacfc \uc735\ud569\ud615 (\ud0dd1)","(\ucf54\uc2a4) \uacbd\uc601\uc815\ubcf4 \uc2dc\uc2a4\ud15c \uc6b4\uc601","\uc815\ubcf4 \ubcf4\ud638 \uad00\ub9ac","(\ucf54\uc2a4) \uad6d\uc81c \ubb34\uc5ed","\uc720\ud1b5 \uad00\ub9ac","(\uc735\ud569) \uc560\ub2c8\uba54\uc774\uc158","\ubb38\ud654\uc608\uc220\ub514\uc790\uc778\ubc29\uc1a1","\ud6c4\ud559\uc2b5\uc9c0\uc6d0\ud615 (\ud0dd1)","\uc77c\ubc18\uc120\ud0dd","\uc138\uacc4\uc2dc\ubbfc\uacfc \uc9c0\ub9ac","\uc735\ud569\uc120\ud0dd","\uc735\ud569\uacfc\ud559 \ud0d0\uad6c","\uc138\uacc4\uc0ac","\uace0\uac1d\uad00\ub9ac \uacc4\ud68d \uc218\ub9bd","\uace0\uac1d\ub370\uc774\ud130 \ubd84\uc11d","\uc0c1\ud488\uad6c\uc131\uae30\ud68d","\ud310\ub9e4\ucd09\uc9c4\uad00\ub9ac","\uc720\ud1b5\ubb3c\ub958\uad00\ub9ac","\uc720\ud1b5\uc815\ubcf4\uad00\ub9ac","\uc2dc\uc2a4\ud15c \ubcf4\uc548 \uad6c\ucd95","NW \ubcf4\uc548 \uad6c\ucd95","\ub514\uc9c0\ud138 \ub514\uc790\uc778 \ud504\ub85c\uc81d\ud2b8 \uc124\uacc4","\ub514\uc790\uc778 \uad6c\uc131 \uc694\uc18c \uc81c\uc791","\uc0c9\ucc44 \ub514\uc790\uc778","(\ucf54\uc2a4) \uce90\ub9ad\ud130","(\ucf54\uc2a4) \uc560\ub2c8\uba54\uc774\uc158","(\uc735\ud569) \uad6d\uc81c \ubb34\uc5ed","\uc81c\uc791 \uae30\ud68d","\ud3b8\uc9d1 \ub808\uc774\uc544\uc6c3 \uc791\uc5c5","\uc0c9\ucc44\ub514\uc790\uc778 \uae30\ud68d","\ubc30\uc0c9","\ub9cc\ud654 \uce90\ub9ad\ud130 \uad6c\uc0c1","\ub9cc\ud654 \uce90\ub9ad\ud130 \uad00\uacc4 \uc124\uc815","\ub9cc\ud654 \uc7a5\uba74 \uc5f0\ucd9c","\uc2a4\ud3ec\uce20 \uc0dd\ud65c2","\uc778\uccb4\uad6c\uc870\uc640 \uae30\ub2a5 \uae30\ubcf8 \uc2e4\uc2b5","\uae30\ucd08 \uac04\ud638 \uc784\uc0c1 \uc2e4\ubb34 \uc2e4\uc2b5","\uac04\ud638\uc758\uae30\ucd08 \uae30\ubcf8 \uc2e4\uc2b5","\uc758\ud559\uc6a9\uc5b4","\ubc29\uc1a1 \ucf58\ud150\uce20 \uc81c\uc791","\uc2dd\ud488\uc870\ub9ac","\uc2dd\uacf5\uac04 \uc5f0\ucd9c","\ub77c\uc774\ube0c \ucee4\uba38\uc2a4","\uc678\uc2dd \ub9c8\ucf00\ud305","\uc138\ubd80\uc804\uacf5 \ucf54\uc2a4\ud615 (\ud0dd1)","\ub77c\uc774\ube0c \ucee4\uba38\uc2a4 \ucf58\ud150\uce20 \uae30\ud68d\uc790 \uc591\uc131\uacfc\uc815","\uad6c\ub9e4 \uc870\ub2ec","\ud478\ub4dc \uc804\ubb38 \uc1fc\ud638\uc2a4\ud2b8 \uc591\uc131\uacfc\uc815","\uc5f0\uadf9","\uc5f0\uae30","\uc81c\ube75","\uc81c\uacfc","\uc2e0\uc0c1\ud488 \uae30\ud68d","\uc804\ub7b5\uc801 \uc81c\ud734","\uc2a4\ud53c\uce58 \ucee4\ubba4\ub2c8\ucf00\uc774\uc158 \uc9c0\ub3c4","\uc5f0\uae30\uc9c0\ub3c4","\uc774\ubca4\ud2b8MC\uc9c0\ub3c4","\uc678\uc2dd\uace0\uac1d\uc11c\ube44\uc2a4\uad00\ub9ac","\ub9c8\ucf00\ud305 \uc804\ub7b5 \uacc4\ud68d \uc218\ub9bd","\ub9c8\ucf00\ud305 \uc2dc\uc7a5\ud658\uacbd \ubd84\uc11d","STP \uc804\ub7b5 \uc218\ub9bd","\ub9c8\ucf00\ud305 \ubbf9\uc2a4 \uc804\ub7b5 \uc218\ub9bd","\uad6c\ub9e4\uc804\ub7b5 \uc218\ub9bd","\uad6c\ub9e4 \ubc1c\uc8fc\uad00\ub9ac","\uad6c\ub9e4\ud488 \ud488\uc9c8\uad00\ub9ac","\uad6c\ub9e4 \uacc4\uc57d","\ud504\ub85c\uadf8\ub7a8 \uae30\ud68d","\uc81c\uc791\ud3b8\uc9d1","\ubc29\uc1a1 \ub9ac\ud5c8\uc124","\uc885\ud569\ud3b8\uc9d1","\ud478\ub4dc \uc2a4\ud0c0\uc77c\ub9c1","\uc74c\uc2dd \uc0ac\uc9c4 \ucd2c\uc601","\uc2dd\uacf5\uac04 \uc7a5\uc2dd\ubb3c \uc5f0\ucd9c","\ud30c\ud2f0 \uc2dd\uacf5\uac04 \uc5f0\ucd9c","\uc2dd\ubb38\ud654 \ucf58\ud150\uce20 \uae30\ud68d","\ube75\ub958 \uc81c\ud488 \uc2a4\ud2b8\ub808\uc774\ud2b8 \ubc18\uc8fd","\ube75\ub958 \uc81c\ud488 \uc2a4\ud380\uc9c0 \ub3c4\uc6b0 \ubc18\uc8fd","\ube75\ub958 \uc81c\ud488 \ud2b9\uc218 \ubc18\uc8fd","\ud398\uc774\uc2a4\ud2b8\ub9ac \ub9cc\ub4e4\uae30","\uc870\ub9ac\ube75 \ub9cc\ub4e4\uae30","\uacfc\uc790\ub958\uc81c\ud488 \uc704\uc0dd\uc548\uc804\uad00\ub9ac","\uae30\ubcf8 \ucf00\uc774\ud06c\ub958 \ub9cc\ub4e4\uae30","\uad6c\uc6c0\uacfc\uc790\ub958 \ub9cc\ub4e4\uae30","\ud0c0\ub974\ud2b8\u00b7\ud30c\uc774\ub958 \ub9cc\ub4e4\uae30"],"d":{"2025":[{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc","course":"\uacbd\uc601\uc815\ubcf4\uc2dc\uc2a4\ud15c \uc6b4\uc601","base1":"\uacbd\uc601\uc0ac\ubb34\uacfc","base2":"\uc815\ubcf4\ucef4\ud4e8\ud130\uacfc","jobs":["\uacbd\uc601 \uc9c0\uc6d0 \uc0ac\ubb34\uc6d0","\uc815\ubcf4 \uc2dc\uc2a4\ud15c \uc6b4\uc601\uc790"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,56,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,57,50,60,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,63,4,4,[0,0,0,0,4,0],47,0],[44,1,0,49,61,64,5,5,[0,0,0,0,0,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,57,61,66,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,80,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,85,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0],[95,1,0,96,31,97,2,2,[0,0,0,2,0,0],29,1]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,3],3,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[66,107,"2001010510_21v4",[0,0,0,0,2,0],2,0,0],[66,108,"2001010516_21v1",[0,0,0,0,2,0],2,0,0],[66,109,"2001010509_21v4",[0,0,0,0,0,3],3,0,0],[66,110,"2001010511_21v4",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,2,0,0],2,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,2,0,0],2,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc","course":"\uad6d\uc81c \ubb34\uc5ed","base1":"\uacbd\uc601\uc0ac\ubb34\uacfc","base2":"\uc815\ubcf4\ucef4\ud4e8\ud130\uacfc","jobs":["\ubb34\uc5ed \uc0ac\ubb34\uc6d0","\uacbd\uc601 \uc9c0\uc6d0 \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,56,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,137,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,63,4,4,[0,0,0,0,4,0],47,0],[44,1,0,49,61,64,5,5,[0,0,0,0,0,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,84,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,80,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,85,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,3],3,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,3],3,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ud1a0\uc5b4\uae30\ud68d\uacfc","course":"\uad6d\uc81c \ubb3c\ub958","base1":"\ub9c8\ucf00\ud305\uacfc","base2":"\uacbd\uc601\uc0ac\ubb34\uacfc","jobs":["\uc0c1\ud488 \ud310\ub9e4\uc6d0","\ubb3c\ub958 \uad00\ub9ac \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,144,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,146,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,82,9,9,[0,0,0,0,4,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,81,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,147,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,148,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,3],3,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,3],3,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ud1a0\uc5b4\uae30\ud68d\uacfc","course":"\uc11c\ube44\uc2a4 \ub9c8\ucf00\ud305","base1":"\ub9c8\ucf00\ud305\uacfc","base2":"\uacbd\uc601\uc0ac\ubb34\uacfc","jobs":["\ub9e4\uc7a5 \ud310\ub9e4\uc6d0","\uc548\ub0b4 \ubc0f \uc811\uc218 \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,144,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,82,9,9,[0,0,0,0,4,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,149,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,147,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,148,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[149,150,"1003020101_14v1",[0,0,0,0,2,0],2,0,0],[149,151,"1003020111_16v2",[0,0,0,0,2,0],2,0,0],[149,152,"1003020106_16v2",[0,0,0,0,0,2],2,0,0],[149,153,"1003020112_16v2",[0,0,0,0,0,3],3,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,3],3,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2dc\uac01\ub514\uc790\uc778\uacfc","course":"","base1":"\ub514\uc790\uc778\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\uc2dc\uac01 \ub514\uc790\uc774\ub108","\ucef4\ud4e8\ud130 \uadf8\ub798\ud53d \ub514\uc790\uc774\ub108"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,77,50,154,5,5,[5,0,0,0,0,0],47,0],[44,1,0,77,50,155,4,4,[4,0,0,0,0,0],47,0],[44,1,0,77,50,78,9,9,[0,9,0,0,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,3,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,77,61,156,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,157,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,158,13,13,[0,0,0,0,5,8],47,0],[44,1,0,77,61,159,15,15,[0,0,0,0,6,9],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[160,147,107,49,61,84,24,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,148,0,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,81,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,82,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[160,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[160,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[160,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[160,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[156,161,"0803020811_18v3",[0,0,2,0,0,0],2,0,0],[156,162,"0803020817_18v3",[0,0,2,0,0,0],2,0,0],[156,163,"0803020819_18v1",[0,0,0,2,0,0],2,0,0],[156,164,"0803020821_18v1",[0,0,0,2,0,0],2,0,0],[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,0,0],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,0,0],[158,167,"0803020415_16v2",[0,0,0,0,2,0],2,0,0],[158,168,"0803020418_16v2",[0,0,0,0,0,3],3,0,0],[158,169,"0803020420_16V2",[0,0,0,0,0,3],3,0,0],[158,170,"0803020421_16v2",[0,0,0,0,0,2],2,0,0],[159,171,"2201010211_16v3",[0,0,0,0,2,0],2,0,0],[159,172,"2201010212_16v3",[0,0,0,0,2,0],2,0,0],[159,173,"2201010213_16v3",[0,0,0,0,2,0],2,0,0],[159,174,"2201010214_16v3",[0,0,0,0,0,3],3,0,0],[159,175,"2201010215_16v3",[0,0,0,0,0,3],3,0,0],[159,176,"2201010216_16v3",[0,0,0,0,0,3],3,0,0],[157,177,"0802010111_20v3",[0,0,2,0,0,0],2,0,0],[157,178,"0802010121_20v3",[0,0,2,0,0,0],2,0,0],[157,179,"0802010117_20v4",[0,0,0,2,0,0],2,0,0],[157,180,"0802010118_20v4",[0,0,0,2,0,0],2,0,0],[84,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[84,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[84,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,1,0,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,2,0,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\ubaa8\uc158\uadf8\ub798\ud53d\ub514\uc790\uc778\uacfc","course":"","base1":"\ub514\uc790\uc778\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\uc601\uc0c1 \ub514\uc790\uc774\ub108","\uc560\ub2c8\uba54\uc774\ud130"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,77,50,154,5,5,[5,0,0,0,0,0],47,0],[44,1,0,77,50,181,4,4,[4,0,0,0,0,0],47,0],[44,1,0,77,50,78,9,9,[0,9,0,0,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,3,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,77,50,155,4,4,[0,0,4,0,0,0],47,0],[44,1,0,77,50,182,4,4,[0,0,0,4,0,0],47,0],[44,1,0,77,61,157,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,158,13,13,[0,0,0,0,5,8],47,0],[44,1,0,77,61,183,15,15,[0,0,0,0,6,9],47,0],[44,1,0,57,61,149,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[160,147,107,49,61,84,24,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,148,0,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,81,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,82,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[160,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[160,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[160,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[160,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,0,0],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,0,0],[158,167,"0803020415_16v2",[0,0,0,0,2,0],2,0,0],[158,168,"0803020418_16v2",[0,0,0,0,0,3],3,0,0],[158,169,"0803020420_16V2",[0,0,0,0,0,3],3,0,0],[158,170,"0803020421_16v2",[0,0,0,0,0,2],2,0,0],[157,177,"0802010111_20v3",[0,0,2,0,0,0],2,0,0],[157,178,"0802010121_20v3",[0,0,2,0,0,0],2,0,0],[157,179,"0802010117_20v4",[0,0,0,2,0,0],2,0,0],[157,180,"0802010118_20v4",[0,0,0,2,0,0],2,0,0],[183,184,"0803020611_16v2",[0,0,0,0,2,0],2,0,0],[183,185,"0803020613_16v2",[0,0,0,0,2,0],2,0,0],[183,186,"0803020616_16v2",[0,0,0,0,2,0],2,0,0],[183,187,"0803020618_16v2",[0,0,0,0,0,3],3,0,0],[183,188,"0803020619_16v2",[0,0,0,0,0,3],3,0,0],[183,189,"0803020621_16v2",[0,0,0,0,0,3],3,0,0],[84,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[84,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[84,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,1,0,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,2,0,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2025,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\ubcf4\uac74\uac04\ud638\uacfc","course":"","base1":"\uac04\ud638\uacfc","base2":"\ubcf5\uc9c0\uacfc","jobs":["\uac04\ud638 \uc870\ubb34\uc0ac","\ubcf4\uc721 \uc11c\ube44\uc2a4 \uc885\uc0ac\uc790"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,190,50,191,9,9,[9,0,0,0,0,0],47,0],[44,1,0,190,50,192,9,9,[0,9,0,0,0,0],47,0],[44,1,0,190,50,193,8,8,[0,0,8,0,0,0],47,0],[44,1,0,190,50,194,5,5,[0,0,0,5,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,190,61,195,6,6,[0,0,3,3,0,0],47,0],[44,1,0,190,50,196,9,9,[0,0,0,0,9,0],47,0],[44,1,0,190,50,197,9,9,[0,0,0,0,9,0],47,0],[44,1,0,190,50,198,9,9,[0,0,0,0,0,9],47,0],[44,1,0,190,61,199,12,12,[0,0,0,0,5,7],47,0],[44,1,0,49,61,62,3,3,[0,0,0,0,0,3],47,0],[67,1,0,190,50,200,10,10,[0,0,0,0,0,10],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,81,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,82,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,83,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,84,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,85,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,83,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,50,87,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,50,88,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,61,89,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,61,90,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,50,182,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,50,93,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,61,94,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,61,90,0,0,[0,0,0,0,0,0],47,0],[95,1,0,96,31,97,2,2,[0,0,2,0,0,0],29,1],[95,1,0,96,31,202,2,2,[0,0,2,0,0,0],29,1]],"n":[[62,111,"0201030206_21v3",[0,0,0,0,0,1],1,0,0],[62,112,"0201030210_21v4",[0,0,0,0,0,2],2,0,0],[195,203,"0601010801_17v2",[0,0,1,0,0,0],1,0,0],[195,204,"0601010802_17v2",[0,0,1,0,0,0],1,0,0],[195,205,"0601010803_17v2",[0,0,0,1,0,0],1,0,0],[195,206,"0601010804_17v2",[0,0,1,0,0,0],1,0,0],[195,207,"0601010805_17v2",[0,0,0,1,0,0],1,0,0],[195,208,"0601010807_17v2",[0,0,0,1,0,0],1,0,0],[199,209,"0703010125_21v3",[0,0,0,0,2,0],2,0,0],[199,210,"0703010126_16v2",[0,0,0,0,3,0],3,0,0],[199,211,"0703010127_21v3",[0,0,0,0,0,7],7,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,4,0,0,0],4,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,4,0,0,0],4,0]}}],"2026":[{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc","course":"\uacbd\uc601\uc815\ubcf4\uc2dc\uc2a4\ud15c \uc6b4\uc601","base1":"\uacbd\uc601\uc0ac\ubb34\uacfc","base2":"\uc815\ubcf4\ucef4\ud4e8\ud130\uacfc","jobs":["\uacbd\uc601 \uc9c0\uc6d0 \uc0ac\ubb34\uc6d0","\uc815\ubcf4 \uc2dc\uc2a4\ud15c \uc6b4\uc601\uc790"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,56,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,57,50,60,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,63,4,4,[0,0,0,0,4,0],47,0],[44,1,0,49,61,64,5,5,[0,0,0,0,0,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,57,61,66,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,80,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,85,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,3],3,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[66,107,"2001010510_21v4",[0,0,0,0,2,0],2,0,0],[66,108,"2001010516_21v1",[0,0,0,0,2,0],2,0,0],[66,109,"2001010509_21v4",[0,0,0,0,0,3],3,0,0],[66,110,"2001010511_21v4",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc","course":"\uad6d\uc81c \ubb34\uc5ed","base1":"\uacbd\uc601\uc0ac\ubb34\uacfc","base2":"\uc815\ubcf4\ucef4\ud4e8\ud130\uacfc","jobs":["\ubb34\uc5ed \uc0ac\ubb34\uc6d0","\uacbd\uc601 \uc9c0\uc6d0 \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,56,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,137,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,63,4,4,[0,0,0,0,4,0],47,0],[44,1,0,49,61,64,5,5,[0,0,0,0,0,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,84,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,80,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,80,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,85,0,8,[0,0,0,0,4,4],47,0],[79,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,3],3,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,3],3,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ud1a0\uc5b4\uae30\ud68d\uacfc","course":"\uad6d\uc81c \ubb3c\ub958","base1":"\ub9c8\ucf00\ud305\uacfc","base2":"\uacbd\uc601\uc0ac\ubb34\uacfc","jobs":["\uc0c1\ud488 \ud310\ub9e4\uc6d0","\ubb3c\ub958 \uad00\ub9ac \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,144,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,146,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,82,9,9,[0,0,0,0,4,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,81,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,147,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,148,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,3],3,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,3],3,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ud1a0\uc5b4\uae30\ud68d\uacfc","course":"\uc11c\ube44\uc2a4 \ub9c8\ucf00\ud305","base1":"\ub9c8\ucf00\ud305\uacfc","base2":"\uacbd\uc601\uc0ac\ubb34\uacfc","jobs":["\ub9e4\uc7a5 \ud310\ub9e4\uc6d0","\uc548\ub0b4 \ubc0f \uc811\uc218 \uc0ac\ubb34\uc6d0"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,0,4,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,5,5,[5,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,5,5,[0,5,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,144,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,50,59,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,49,61,82,9,9,[0,0,0,0,4,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,149,9,9,[0,0,0,0,4,5],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[79,147,107,49,61,81,24,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,82,0,8,[0,0,0,0,4,4],47,0],[79,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,84,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,148,0,8,[0,0,0,0,4,4],47,0],[79,147,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[79,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[79,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[79,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[79,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[79,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[79,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,0,0],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,0,0],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,0,0],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,0,0],[149,150,"1003020101_14v1",[0,0,0,0,2,0],2,0,0],[149,151,"1003020111_16v2",[0,0,0,0,2,0],2,0,0],[149,152,"1003020106_16v2",[0,0,0,0,0,2],2,0,0],[149,153,"1003020112_16v2",[0,0,0,0,0,3],3,0,0],[138,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[138,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[138,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[138,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[138,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,3],3,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2dc\uac01\ub514\uc790\uc778\uacfc","course":"","base1":"\ub514\uc790\uc778\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\uc2dc\uac01 \ub514\uc790\uc774\ub108","\ucef4\ud4e8\ud130 \uadf8\ub798\ud53d \ub514\uc790\uc774\ub108"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,77,50,154,5,5,[5,0,0,0,0,0],47,0],[44,1,0,77,50,155,4,4,[4,0,0,0,0,0],47,0],[44,1,0,77,50,78,9,9,[0,9,0,0,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,3,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,77,61,156,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,157,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,158,13,13,[0,0,0,0,5,8],47,0],[44,1,0,77,61,159,15,15,[0,0,0,0,6,9],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[160,147,107,49,61,84,24,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,148,0,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,81,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,82,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[160,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[160,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[160,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[160,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[156,161,"0803020811_18v3",[0,0,2,0,0,0],2,0,0],[156,162,"0803020817_18v3",[0,0,2,0,0,0],2,0,0],[156,163,"0803020819_18v1",[0,0,0,2,0,0],2,0,0],[156,164,"0803020821_18v1",[0,0,0,2,0,0],2,0,0],[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,0,0],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,0,0],[158,167,"0803020415_16v2",[0,0,0,0,2,0],2,0,0],[158,168,"0803020418_16v2",[0,0,0,0,0,3],3,0,0],[158,169,"0803020420_16V2",[0,0,0,0,0,3],3,0,0],[158,170,"0803020421_16v2",[0,0,0,0,0,2],2,0,0],[159,171,"2201010211_16v3",[0,0,0,0,2,0],2,0,0],[159,172,"2201010212_16v3",[0,0,0,0,2,0],2,0,0],[159,173,"2201010213_16v3",[0,0,0,0,2,0],2,0,0],[159,174,"2201010214_16v3",[0,0,0,0,0,3],3,0,0],[159,175,"2201010215_16v3",[0,0,0,0,0,3],3,0,0],[159,176,"2201010216_16v3",[0,0,0,0,0,3],3,0,0],[157,212,"0802010116_20v4",[0,0,2,0,0,0],2,0,0],[157,179,"0802010117_20v4",[0,0,2,0,0,0],2,0,0],[157,213,"0802010119_20v3",[0,0,0,2,0,0],2,0,0],[157,214,"0802010120_20v3",[0,0,0,2,0,0],2,0,0],[84,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[84,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[84,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,1,0,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,2,0,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\ubaa8\uc158\uadf8\ub798\ud53d\ub514\uc790\uc778\uacfc","course":"","base1":"\ub514\uc790\uc778\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\uc601\uc0c1 \ub514\uc790\uc774\ub108","\uc560\ub2c8\uba54\uc774\ud130"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,77,50,154,5,5,[5,0,0,0,0,0],47,0],[44,1,0,77,50,181,4,4,[4,0,0,0,0,0],47,0],[44,1,0,77,50,78,9,9,[0,9,0,0,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,3,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,77,50,155,4,4,[0,0,4,0,0,0],47,0],[44,1,0,77,50,182,4,4,[0,0,0,4,0,0],47,0],[44,1,0,77,61,157,8,8,[0,0,4,4,0,0],47,0],[44,1,0,77,61,158,13,13,[0,0,0,0,5,8],47,0],[44,1,0,77,61,183,15,15,[0,0,0,0,6,9],47,0],[44,1,0,57,61,149,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,50,69,0,0,[0,0,0,0,0,0],47,0],[67,1,0,68,61,70,0,0,[0,0,0,0,0,0],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[160,147,107,49,61,84,24,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,148,0,8,[0,0,0,0,4,4],47,0],[160,147,107,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,81,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,82,0,8,[0,0,0,0,4,4],47,0],[160,80,110,49,61,83,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,50,87,0,4,[0,0,0,0,4,0],47,0],[160,86,113,77,50,88,0,4,[0,0,0,0,0,4],47,0],[160,86,113,77,61,89,0,8,[0,0,0,0,4,4],47,0],[160,86,113,77,61,90,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,50,92,0,4,[0,0,0,0,4,0],47,0],[160,91,117,77,50,93,0,4,[0,0,0,0,0,4],47,0],[160,91,117,77,61,94,0,8,[0,0,0,0,4,4],47,0],[160,91,117,77,61,90,0,8,[0,0,0,0,4,4],47,0]],"n":[[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,0,0],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,0,0],[158,167,"0803020415_16v2",[0,0,0,0,2,0],2,0,0],[158,168,"0803020418_16v2",[0,0,0,0,0,3],3,0,0],[158,169,"0803020420_16V2",[0,0,0,0,0,3],3,0,0],[158,170,"0803020421_16v2",[0,0,0,0,0,2],2,0,0],[157,212,"0802010116_20v4",[0,0,2,0,0,0],2,0,0],[157,179,"0802010117_20v4",[0,0,2,0,0,0],2,0,0],[157,213,"0802010119_20v3",[0,0,0,2,0,0],2,0,0],[157,214,"0802010120_20v3",[0,0,0,2,0,0],2,0,0],[183,184,"0803020611_16v2",[0,0,0,0,2,0],2,0,0],[183,185,"0803020613_16v2",[0,0,0,0,2,0],2,0,0],[183,186,"0803020616_16v2",[0,0,0,0,2,0],2,0,0],[183,187,"0803020618_16v2",[0,0,0,0,0,3],3,0,0],[183,188,"0803020619_16v2",[0,0,0,0,0,3],3,0,0],[183,189,"0803020621_16v2",[0,0,0,0,0,3],3,0,0],[84,139,"0204030204_24v2",[0,0,0,0,1,0],1,0,0],[84,140,"0204030210_24v3",[0,0,0,0,1,0],1,0,0],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,0,0],[84,142,"0204030212_24v3",[0,0,0,0,0,2],2,0,0],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,0,0],[62,111,"0201030206_21v3",[0,0,1,0,0,0],1,0,0],[62,112,"0201030210_21v4",[0,0,2,0,0,0],2,0,0],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,0,0],[64,103,"0202010108_19v2",[0,0,0,0,0,2],2,0,0],[63,104,"LM0301010102_14v1",[0,0,0,0,2,0],2,0,0],[63,105,"LM0301010104_14v1",[0,0,0,0,1,0],1,0,0],[63,106,"LM0301010113_16v2",[0,0,0,0,1,0],1,0,0],[81,113,"0204010203_20v2",[0,0,0,0,2,0],2,0,0],[81,114,"0204010204_20v2",[0,0,0,0,2,0],2,0,0],[81,115,"0204010205_20v2",[0,0,0,0,0,2],2,0,0],[81,116,"0204010206_20v2",[0,0,0,0,0,2],2,0,0],[82,117,"1003010204_16v2",[0,0,0,0,2,0],2,0,0],[82,118,"1003010205_16v2",[0,0,0,0,2,0],2,0,0],[82,119,"1003010207_16v2",[0,0,0,0,0,2],2,0,0],[82,120,"1003010209_13v1",[0,0,0,0,0,2],2,0,0],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,0,0],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,0,0],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,0,0],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,0,0],[89,125,"0803020701_16v2",[0,0,0,0,2,0],2,0,0],[89,126,"0803020702_16v2",[0,0,0,0,2,0],2,0,0],[89,127,"0803020712_16v2",[0,0,0,0,0,2],2,0,0],[89,128,"0803020715_16v2",[0,0,0,0,0,2],2,0,0],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,0,0],[94,130,"0802010415_23v3",[0,0,0,0,2,0],2,0,0],[94,131,"0802010416_23v3",[0,0,0,0,0,2],2,0,0],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,0,0],[90,133,"0803020903_18v3",[0,0,0,0,2,0],2,0,0],[90,134,"0803020909_18v3",[0,0,0,0,2,0],2,0,0],[90,135,"0803020910_18v3",[0,0,0,0,0,2],2,0,0],[90,136,"0803020913_18v3",[0,0,0,0,0,2],2,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[3,0,0,0,0,0],3,0]}},{"i":{"year":2026,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\ubcf4\uac74\uac04\ud638\uacfc","course":"","base1":"\uac04\ud638\uacfc","base2":"\ubcf5\uc9c0\uacfc","jobs":["\uac04\ud638 \uc870\ubb34\uc0ac","\ubcf4\uc721 \uc11c\ube44\uc2a4 \uc885\uc0ac\uc790"]},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,3,3,[0,0,0,0,3,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,3,3,[3,0,0,0,0,0],9,0],[0,1,0,40,31,42,3,3,[0,3,0,0,0,0],9,0],[0,1,0,40,7,43,4,4,[0,0,4,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,190,50,191,9,9,[9,0,0,0,0,0],47,0],[44,1,0,190,50,192,9,9,[0,9,0,0,0,0],47,0],[44,1,0,190,50,193,8,8,[0,0,8,0,0,0],47,0],[44,1,0,190,50,194,5,5,[0,0,0,5,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,190,61,195,6,6,[0,0,3,3,0,0],47,0],[44,1,0,190,50,196,9,9,[0,0,0,0,9,0],47,0],[44,1,0,190,50,197,9,9,[0,0,0,0,9,0],47,0],[44,1,0,190,50,198,9,9,[0,0,0,0,0,9],47,0],[44,1,0,190,61,199,12,12,[0,0,0,0,5,7],47,0],[44,1,0,49,61,62,3,3,[0,0,0,0,0,3],47,0],[67,1,0,190,50,200,10,10,[0,0,0,0,0,10],47,0],[71,1,0,2,7,72,3,3,[0,0,0,0,3,0],9,0],[71,1,0,14,7,73,0,0,[0,0,0,0,0,0],9,0],[71,1,0,10,7,74,0,0,[0,0,0,0,0,0],9,0],[71,1,0,75,35,76,0,0,[0,0,0,0,0,0],9,0],[71,1,0,77,50,78,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,81,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,82,0,0,[0,0,0,0,0,0],47,0],[201,147,107,49,61,83,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,84,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,85,0,0,[0,0,0,0,0,0],47,0],[201,80,110,49,61,83,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,50,87,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,50,88,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,61,89,0,0,[0,0,0,0,0,0],47,0],[201,86,113,77,61,90,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,50,182,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,50,93,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,61,94,0,0,[0,0,0,0,0,0],47,0],[201,91,117,77,61,90,0,0,[0,0,0,0,0,0],47,0],[95,1,0,96,31,97,2,2,[0,2,0,0,0,0],29,1],[95,1,0,96,31,202,2,2,[0,2,0,0,0,0],29,1]],"n":[[62,111,"0201030206_21v3",[0,0,0,0,0,1],1,0,0],[62,112,"0201030210_21v4",[0,0,0,0,0,2],2,0,0],[62,204,"0601010802_23v3",[0,0,1,0,0,0],1,0,0],[62,205,"0601010803_23v3",[0,0,0,2,0,0],2,0,0],[62,206,"0601010804_23v3",[0,0,2,0,0,0],2,0,0],[62,207,"0601010805_23v3",[0,0,0,1,0,0],1,0,0],[199,209,"0703010125_21v3",[0,0,0,0,2,0],2,0,0],[199,210,"0703010126_16v2",[0,0,0,0,3,0],3,0,0],[199,211,"0703010127_21v3",[0,0,0,0,0,7],7,0,0]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[20,20,16,16,3,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[9,9,13,13,26,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,4,0,0,0,0],4,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,4,0,0,0,0],4,0]}}],"2027":[{"i":{"year":2027,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2a4\ub9c8\ud2b8IT\uacbd\uc601\uacfc","base1":"\uacbd\uc601\uc0ac\ubb34\uacfc","base2":"\uc815\ubcf4\ucef4\ud4e8\ud130\uacfc","jobs":["\uacbd\uc601 \uc9c0\uc6d0 \uc0ac\ubb34\uc6d0","\ubb34\uc5ed \uc0ac\ubb34\uc6d0","\uc815\ubcf4 \uc2dc\uc2a4\ud15c \uc6b4\uc601\uc790"],"course":""},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,2,2,[0,0,0,0,2,0],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,4,4,[4,0,0,0,0,0],9,0],[0,1,0,40,31,42,4,4,[0,4,0,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,54,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,55,3,3,[0,0,3,0,0,0],47,0],[44,1,0,49,50,56,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,59,5,5,[0,0,0,5,0,0],47,0],[44,1,0,49,50,145,6,6,[0,0,0,6,0,0],47,0],[44,1,0,49,61,63,5,5,[0,0,0,0,5,0],47,0],[44,1,0,49,61,64,5,5,[0,0,0,0,0,5],47,0],[44,1,0,49,61,65,10,10,[0,0,0,0,3,7],47,0],[44,1,0,49,61,83,8,8,[0,0,0,0,4,4],47,0],[44,1,0,49,61,62,8,8,[0,0,0,0,4,4],47,0],[215,216,51,57,50,60,4,4,[0,0,0,4,0,0],47,0],[215,216,51,57,61,217,8,8,[0,0,0,0,4,4],47,0],[215,216,51,57,61,66,9,9,[0,0,0,0,4,5],47,0],[215,218,54,49,50,137,4,4,[0,0,0,4,0,0],47,0],[215,218,54,49,61,219,8,8,[0,0,0,0,4,4],47,0],[215,218,54,49,61,84,9,9,[0,0,0,0,4,5],47,0],[215,220,57,221,50,93,4,4,[0,0,0,4,0,0],47,0],[215,220,57,221,61,94,8,8,[0,0,0,0,4,4],47,0],[215,220,57,221,61,183,9,9,[0,0,0,0,4,5],47,0],[222,1,0,0,223,72,3,3,[0,0,0,0,3,0],9,0],[222,1,0,0,223,73,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,74,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,224,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,225,226,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,227,0,0,[0,0,0,0,0,0],9,0]],"n":[[63,104,"0301010102_14v1",[0,0,0,0,2,0],2,25,3],[63,105,"0301010104_14v1",[0,0,0,0,2,0],2,20,2],[63,106,"0301010113_16v2",[0,0,0,0,1,0],1,25,2],[64,102,"0202010107_19v2",[0,0,0,0,0,2],2,16,3],[64,103,"0202010108_19v2",[0,0,0,0,0,3],3,16,2],[65,98,"0202030201_22v3",[0,0,0,0,3,0],3,20,3],[65,99,"0202030202_22v3",[0,0,0,0,0,2],2,20,2],[65,100,"0202030206_22v4",[0,0,0,0,0,2],2,20,2],[65,101,"0202030209_22v2",[0,0,0,0,0,3],3,80,3],[83,121,"0203020101_20v4",[0,0,0,0,2,0],2,40,2],[83,122,"0203020102_20v4",[0,0,0,0,2,0],2,30,2],[83,123,"0203020103_20v4",[0,0,0,0,0,2],2,40,2],[83,124,"0203020104_20v4",[0,0,0,0,0,2],2,30,2],[62,228,"0201030201_21v3",[0,0,0,0,2,0],2,20,5],[62,111,"0201030206_21v3",[0,0,0,0,2,0],2,16,3],[62,112,"0201030210_21v4",[0,0,0,0,0,2],2,24,4],[62,229,"0201030211_21v4",[0,0,0,0,0,2],2,60,5],[219,230,"0201030401_21v2",[0,0,0,0,2,0],2,30,4],[219,231,"0201030404_21v2",[0,0,0,0,2,0],2,30,4],[219,232,"0201030408_21v2",[0,0,0,0,0,2],2,20,3],[219,233,"0201030413_21v2",[0,0,0,0,0,2],2,40,4],[84,140,"0204030210_24v3",[0,0,0,0,2,0],2,20,3],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,20,3],[84,142,"0204030212_24v3",[0,0,0,0,0,3],3,30,3],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,20,3],[217,234,"2001020613_19v5",[0,0,0,0,4,0],4,40,5],[217,235,"2001020614_19v5",[0,0,0,0,0,4],4,40,5],[66,107,"2001010510_21v4",[0,0,0,0,2,0],2,40,5],[66,108,"2001010516_21v1",[0,0,0,0,2,0],2,80,5],[66,109,"2001010509_21v4",[0,0,0,0,0,2],2,40,6],[66,110,"2001010511_21v4",[0,0,0,0,0,3],3,40,6],[94,236,"0802010412_16v2",[0,0,0,0,2,0],2,30,5],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,30,3],[94,237,"0802010416_23v3",[0,0,0,0,0,2],2,70,5],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,20,5],[183,184,"0803020611_16v2",[0,0,0,0,2,0],2,30,3],[183,185,"0803020613_16v2",[0,0,0,0,2,0],2,45,3],[183,186,"0803020616_16v2",[0,0,0,0,0,2],2,45,5],[183,188,"0803020619_16v2",[0,0,0,0,0,3],3,45,3]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[21,21,16,12,5,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[8,8,13,17,24,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2027,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc2dc\uac01\ub514\uc790\uc778\uacfc","base1":"\ub514\uc790\uc778\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\uc2dc\uac01 \ub514\uc790\uc774\ub108","\uc560\ub2c8\uba54\uc774\ud130"],"course":""},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,2,2,[0,0,0,0,2,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,7,41,4,4,[4,0,0,0,0,0],9,0],[0,1,0,40,31,42,4,4,[0,4,0,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,221,50,154,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,51,4,4,[4,0,0,0,0,0],47,0],[44,1,0,221,50,78,8,8,[0,8,0,0,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,3,0,0,0],47,0],[44,1,0,221,50,155,4,4,[0,0,4,0,0,0],47,0],[44,1,0,221,50,182,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,221,61,157,8,8,[0,0,4,4,0,0],47,0],[44,1,0,49,50,59,2,2,[0,0,0,0,2,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,0,4,0],47,0],[44,1,0,221,61,158,13,13,[0,0,0,0,5,8],47,0],[44,1,0,221,61,159,13,13,[0,0,0,0,5,8],47,0],[44,1,0,221,61,238,4,4,[0,0,0,0,0,4],47,0],[215,239,50,221,50,88,4,4,[0,0,0,4,0,0],47,0],[215,239,50,221,61,89,8,8,[0,0,0,0,4,4],47,0],[215,239,50,221,61,156,9,9,[0,0,0,0,4,5],47,0],[215,240,53,221,50,93,4,4,[0,0,0,4,0,0],47,0],[215,240,53,221,61,94,8,8,[0,0,0,0,4,4],47,0],[215,240,53,221,61,183,9,9,[0,0,0,0,4,5],47,0],[215,241,56,49,50,137,4,4,[0,0,0,4,0,0],47,0],[215,241,56,49,61,219,8,8,[0,0,0,0,4,4],47,0],[215,241,56,49,61,84,9,9,[0,0,0,0,4,5],47,0],[222,1,0,0,223,72,3,3,[0,0,0,0,3,0],9,0],[222,1,0,0,223,73,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,74,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,224,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,225,226,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,227,0,0,[0,0,0,0,0,0],9,0]],"n":[[157,212,"0802010116_20v4",[0,0,2,0,0,0],2,30,3],[157,179,"0802010117_20v4",[0,0,2,0,0,0],2,30,4],[157,213,"0802010119_20v3",[0,0,0,2,0,0],2,20,3],[157,214,"0802010120_20v3",[0,0,0,2,0,0],2,20,4],[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,45,5],[158,242,"0803020412_16v2",[0,0,0,0,2,0],2,45,5],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,45,5],[158,167,"0803020415_16v2",[0,0,0,0,0,3],3,45,5],[158,168,"0803020418_16v2",[0,0,0,0,0,3],3,45,5],[158,170,"0803020421_16v2",[0,0,0,0,0,2],2,45,5],[159,171,"2201010211_16v3",[0,0,0,0,1,0],1,30,3],[159,172,"2201010212_16v3",[0,0,0,0,2,0],2,30,5],[159,173,"2201010213_16v3",[0,0,0,0,2,0],2,30,3],[159,174,"2201010214_16v3",[0,0,0,0,0,3],3,30,3],[159,175,"2201010215_16v3",[0,0,0,0,0,3],3,30,3],[159,243,"2201010305_16v3",[0,0,0,0,0,2],2,30,3],[238,244,"0802010803_23v2",[0,0,0,0,0,2],2,60,5],[238,245,"0802010806_15v1",[0,0,0,0,0,2],2,60,3],[89,246,"0803020711_16v2",[0,0,0,0,2,0],2,45,4],[89,127,"0803020712_16v2",[0,0,0,0,2,0],2,45,3],[89,247,"0803020713_16v2",[0,0,0,0,0,2],2,45,3],[89,248,"0803020714_16v2",[0,0,0,0,0,2],2,30,3],[156,161,"0803020811_18v3",[0,0,0,0,2,0],2,45,4],[156,162,"0803020817_18v3",[0,0,0,0,2,0],2,60,3],[156,163,"0803020819_18v1",[0,0,0,0,0,3],3,90,4],[156,164,"0803020821_18v1",[0,0,0,0,0,2],2,45,3],[94,236,"0802010412_16v2",[0,0,0,0,2,0],2,30,5],[94,129,"0802010413_16v2",[0,0,0,0,2,0],2,30,3],[94,237,"0802010416_23v3",[0,0,0,0,0,2],2,70,5],[94,132,"0802010421_16v3",[0,0,0,0,0,2],2,20,5],[183,184,"0803020611_16v2",[0,0,0,0,2,0],2,30,3],[183,185,"0803020613_16v2",[0,0,0,0,2,0],2,45,3],[183,186,"0803020616_16v2",[0,0,0,0,0,2],2,45,5],[183,188,"0803020619_16v2",[0,0,0,0,0,3],3,45,3],[62,111,"0201030206_21v3",[0,0,1,0,0,0],1,16,3],[62,112,"0201030210_21v4",[0,0,2,0,0,0],2,24,4],[219,230,"0201030401_21v2",[0,0,0,0,2,0],2,30,4],[219,231,"0201030404_21v2",[0,0,0,0,2,0],2,30,4],[219,232,"0201030408_21v2",[0,0,0,0,0,2],2,20,3],[219,233,"0201030413_21v2",[0,0,0,0,0,2],2,40,4],[84,140,"0204030210_24v3",[0,0,0,0,2,0],2,20,3],[84,141,"0204030211_24v3",[0,0,0,0,2,0],2,20,3],[84,142,"0204030212_24v3",[0,0,0,0,0,3],3,30,3],[84,143,"0204030213_24v3",[0,0,0,0,0,2],2,20,3]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[21,21,12,16,5,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[8,8,17,13,24,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2027,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\ubcf4\uac74\uac04\ud638\uacfc","base1":"\uac04\ud638\uacfc","base2":"\ubcf5\uc9c0\uacfc","jobs":["\uac04\ud638 \uc870\ubb34\uc0ac","\ubcf4\uc721 \uc11c\ube44\uc2a4 \uc885\uc0ac\uc790"],"course":""},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,0,4,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,4,0,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,0,4,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[0,0,3,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,0,0,3,0,0],5,0],[0,1,0,24,3,25,3,3,[3,0,0,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,3,0,0,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,2,2,[0,0,0,0,2,0],29,0],[0,1,0,27,35,249,2,2,[0,0,0,0,0,2],29,0],[0,1,0,37,7,38,3,3,[0,0,3,0,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,0,3,0,0],29,0],[0,1,0,40,7,41,4,4,[4,0,0,0,0,0],9,0],[0,1,0,40,31,42,4,4,[0,4,0,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,190,50,191,8,8,[8,0,0,0,0,0],47,0],[44,1,0,190,50,192,8,8,[0,8,0,0,0,0],47,0],[44,1,0,190,50,193,8,8,[0,0,8,0,0,0],47,0],[44,1,0,221,50,181,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,3,3,[0,0,0,3,0,0],47,0],[44,1,0,190,61,195,6,6,[0,0,3,3,0,0],47,0],[44,1,0,190,50,196,10,10,[0,0,0,0,10,0],47,0],[44,1,0,190,50,197,9,9,[0,0,0,0,9,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,0,0,3],47,0],[44,1,0,190,50,198,8,8,[0,0,0,0,0,8],47,0],[67,1,0,190,50,250,5,5,[0,0,0,5,0,0],47,0],[67,1,0,190,50,251,5,5,[0,0,0,0,5,0],47,0],[67,1,0,190,50,252,7,7,[0,0,0,0,0,7],47,0],[67,1,0,190,50,253,9,9,[0,0,0,0,0,9],47,0],[222,1,0,0,223,72,3,3,[0,0,0,0,3,0],9,0],[222,1,0,0,223,73,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,74,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,224,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,225,226,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,227,0,0,[0,0,0,0,0,0],9,0]],"n":[[62,111,"0201030206_21v3",[0,0,0,0,0,1],1,16,3],[62,112,"0201030210_21v4",[0,0,0,0,0,2],2,24,4],[195,204,"0601010802_23v3",[0,0,1,0,0,0],1,30,2],[195,205,"0601010803_23v3",[0,0,0,2,0,0],2,40,2],[195,206,"0601010804_23v3",[0,0,2,0,0,0],2,50,2],[195,207,"0601010805_23v3",[0,0,0,1,0,0],1,30,2]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[21,21,12,16,5,2],77,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[8,8,17,13,24,27],97,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}},{"i":{"year":2027,"school":"\uc2e0\uc77c\ube44\uc988\ub2c8\uc2a4\uace0\ub4f1\ud559\uad50","dept":"\uc1fc\ud551\ub77c\uc774\ube0c\ucee4\uba38\uc2a4\uacfc","base1":"\ub9c8\ucf00\ud305\uacfc","base2":"\ubb38\ud654\ucf58\ud150\uce20\uacfc","jobs":["\ub77c\uc774\ube0c \ucee4\uba38\uc2a4 \ucf58\ud150\uce20 \uae30\ud68d\uc790","\ud478\ub4dc \uc804\ubb38 \uc1fc\ud638\uc2a4\ud2b8"],"course":""},"r":[[0,1,0,2,3,4,3,3,[3,0,0,0,0,0],5,0],[0,1,0,2,3,6,3,3,[0,3,0,0,0,0],5,0],[0,1,0,2,7,8,4,4,[0,0,4,0,0,0],9,0],[0,1,0,10,3,11,3,3,[3,0,0,0,0,0],5,0],[0,1,0,10,3,12,3,3,[0,3,0,0,0,0],5,0],[0,1,0,10,7,13,4,4,[0,0,0,4,0,0],9,0],[0,1,0,14,3,15,3,3,[3,0,0,0,0,0],5,0],[0,1,0,14,3,16,3,3,[0,3,0,0,0,0],5,0],[0,1,0,14,7,17,4,4,[0,0,4,0,0,0],9,0],[0,1,0,18,3,19,3,3,[3,0,0,0,0,0],20,0],[0,1,0,18,3,21,3,3,[0,3,0,0,0,0],20,0],[0,1,0,18,3,22,3,3,[3,0,0,0,0,0],5,0],[0,1,0,18,3,23,3,3,[0,3,0,0,0,0],5,0],[0,1,0,24,3,25,3,3,[0,0,3,0,0,0],5,0],[0,1,0,24,3,26,3,3,[0,0,0,3,0,0],5,0],[0,1,0,27,7,28,2,2,[2,0,0,0,0,0],29,0],[0,1,0,27,7,30,2,2,[0,2,0,0,0,0],29,0],[0,1,0,27,31,32,2,2,[0,0,2,0,0,0],29,0],[0,1,0,27,31,33,2,2,[0,0,0,2,0,0],34,0],[0,1,0,27,35,36,2,2,[0,0,0,0,2,0],29,0],[0,1,0,37,7,38,3,3,[0,0,0,3,0,0],29,0],[0,1,0,37,31,39,3,3,[0,0,3,0,0,0],29,0],[0,1,0,40,31,181,4,4,[4,0,0,0,0,0],9,0],[0,1,0,40,31,92,4,4,[0,4,0,0,0,0],9,0],[44,1,0,45,45,46,2,2,[0,0,2,0,0,0],47,0],[44,1,0,45,45,48,2,2,[0,0,0,2,0,0],47,0],[44,1,0,49,50,51,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,52,4,4,[4,0,0,0,0,0],47,0],[44,1,0,49,50,53,4,4,[0,4,0,0,0,0],47,0],[44,1,0,221,50,78,4,4,[0,4,0,0,0,0],47,0],[44,1,0,49,50,144,4,4,[0,0,4,0,0,0],47,0],[44,1,0,57,50,58,4,4,[0,0,4,0,0,0],47,0],[44,1,0,49,50,145,4,4,[0,0,0,4,0,0],47,0],[44,1,0,49,61,62,3,3,[0,0,0,3,0,0],47,0],[44,1,0,221,61,254,8,8,[0,0,0,0,4,4],47,0],[44,1,0,255,61,256,6,6,[0,0,0,0,3,3],47,0],[67,1,0,49,61,257,10,10,[0,0,0,0,4,6],47,0],[67,1,0,49,61,258,7,7,[0,0,0,0,3,4],47,0],[259,260,49,49,50,146,4,4,[0,0,0,4,0,0],47,0],[259,260,49,221,50,88,3,3,[0,0,3,0,0,0],47,0],[259,260,49,221,50,93,4,4,[0,0,0,4,0,0],47,0],[259,260,49,49,61,261,7,7,[0,0,0,0,3,4],47,0],[259,260,49,49,61,219,9,9,[0,0,0,0,4,5],47,0],[259,260,49,221,61,158,6,6,[0,0,0,0,3,3],47,0],[259,262,55,49,50,59,4,4,[0,0,0,4,0,0],47,0],[259,262,55,221,50,263,3,3,[0,0,3,0,0,0],47,0],[259,262,55,221,50,264,4,4,[0,0,0,4,0,0],47,0],[259,262,55,49,61,149,7,7,[0,0,0,0,3,4],47,0],[259,262,55,255,61,265,9,9,[0,0,0,0,4,5],47,0],[259,262,55,255,61,266,6,6,[0,0,0,0,3,3],47,0],[222,1,0,0,223,72,3,3,[0,0,0,0,3,0],9,0],[222,1,0,0,223,73,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,74,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,224,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,225,226,0,0,[0,0,0,0,0,0],9,0],[222,1,0,0,223,227,0,0,[0,0,0,0,0,0],9,0]],"n":[[62,111,"0201030206_21v3",[0,0,0,1,0,0],1,16,3],[62,112,"0201030210_21v4",[0,0,0,2,0,0],2,24,4],[257,267,"0201030102_21v5",[0,0,0,0,2,0],2,24,5],[257,268,"0201030106_21v4",[0,0,0,0,2,0],2,16,5],[257,269,"1204050106_16v2",[0,0,0,0,0,2],2,50,3],[257,270,"1204050108_16v2",[0,0,0,0,0,2],2,45,3],[257,271,"1204050109_16v2",[0,0,0,0,0,2],2,40,3],[258,272,"1301030101_21v2",[0,0,0,0,2,0],2,20,4],[258,273,"0201030108_21v4",[0,0,0,0,1,0],1,16,5],[258,274,"0201030109_21v4",[0,0,0,0,0,2],2,16,3],[258,275,"0201030116_21v4",[0,0,0,0,0,1],1,46,4],[258,276,"0201030117_21v4",[0,0,0,0,0,1],1,46,4],[261,277,"0204010101_14v1",[0,0,0,0,1,0],1,16,7],[261,278,"0204010104_14v1",[0,0,0,0,2,0],2,16,3],[261,279,"0204010105_14v1",[0,0,0,0,0,2],2,16,4],[261,280,"0204010109_14v1",[0,0,0,0,0,2],2,16,4],[219,230,"0201030401_21v2",[0,0,0,0,2,0],2,30,4],[219,231,"0201030404_21v2",[0,0,0,0,2,0],2,30,4],[219,232,"0201030408_21v2",[0,0,0,0,0,2],2,20,3],[219,233,"0201030413_21v2",[0,0,0,0,0,3],3,40,4],[149,150,"1003020101_14v1",[0,0,0,0,2,0],2,20,2],[149,151,"1003020111_16v2",[0,0,0,0,1,0],1,45,3],[149,152,"1003020106_16v2",[0,0,0,0,0,2],2,40,3],[149,153,"1003020112_16v2",[0,0,0,0,0,2],2,50,3],[254,281,"0803020101_16v2",[0,0,0,0,2,0],2,50,5],[254,282,"0803020120_16v3",[0,0,0,0,2,0],2,50,5],[254,283,"0803020116_16v2",[0,0,0,0,0,2],2,45,4],[254,284,"0803020123_16v2",[0,0,0,0,0,2],2,45,5],[158,165,"0803020411_16v2",[0,0,0,0,1,0],1,45,5],[158,166,"0803020414_16v2",[0,0,0,0,2,0],2,45,5],[158,168,"0803020418_16v2",[0,0,0,0,0,2],2,45,5],[158,170,"0803020421_16v2",[0,0,0,0,0,1],1,45,5],[256,285,"1301020502_16v1",[0,0,0,0,2,0],2,40,3],[256,286,"1301020509_16v1",[0,0,0,0,1,0],1,40,3],[256,287,"1301020505_24v2",[0,0,0,0,0,1],1,40,3],[256,288,"1301020506_24v2",[0,0,0,0,0,1],1,50,4],[256,289,"1301020508_16v1",[0,0,0,0,0,1],1,50,5],[265,290,"2102010214_23v5",[0,0,0,0,2,0],2,30,3],[265,291,"2102010215_23v5",[0,0,0,0,2,0],2,40,4],[265,292,"2102010216_23v5",[0,0,0,0,0,1],1,30,4],[265,293,"2102010217_23v2",[0,0,0,0,0,2],2,40,4],[265,294,"2102010218_23v2",[0,0,0,0,0,2],2,40,4],[266,295,"2102010108_18v4",[0,0,0,0,1,0],1,20,3],[266,296,"2102010117_23v1",[0,0,0,0,2,0],2,40,3],[266,297,"2102010118_23v1",[0,0,0,0,0,2],2,40,3],[266,298,"2102010119_23v1",[0,0,0,0,0,1],1,40,3]],"t":{"\ubcf4\ud1b5\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[21,21,16,12,5,0],75,64],"\uc804\ubb38\uad50\uacfc \uc774\uc218 \ud569\uacc4":[[8,8,13,17,24,29],99,80],"\uad50\uacfc \ucd1d \uc774\uc218 \ud569\uacc4":[[29,29,29,29,29,29],174,174],"\uc790\uc728\u2027\uc790\uce58\ud65c\ub3d9":[[20,20,20,20,20,20],288,288],"\ub3d9\uc544\ub9ac\ud65c\ub3d9":[[12,12,12,12,12,12],0,0],"\uc9c4\ub85c\ud65c\ub3d9":[[16,16,16,16,16,16],0,0],"\ud559\uae30\ubcc4 \uc774\uc218\ud559\uc810":[[3,3,3,3,3,3],18,18],"\ud559\uae30\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[32,32,32,32,32,32],192,192],"\ud559\ub144\ubcc4 \ucd1d \uc774\uc218 \ud569\uacc4":[[64,0,64,0,64,0],192,192],"\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0],"\ud559\uae30\ubcc4 \ucd08\uacfc\uc774\uc218 \ud569\uacc4":[[0,0,0,0,0,0],0,0]}}]}};
+
+const V=PACK.v, D=PACK.d;
+const SEMS=["1학년 1학기","1학년 2학기","2학년 1학기","2학년 2학기","3학년 1학기","3학년 2학기"];
+const SEMS_S=["1-1","1-2","2-1","2-2","3-1","3-2"];
+const GRADES=[
+  {g:1, year:String(CONFIG.schoolYear),   color:"var(--g1)"},
+  {g:2, year:String(CONFIG.schoolYear-1), color:"var(--g2)"},
+  {g:3, year:String(CONFIG.schoolYear-2), color:"var(--g3)"},
+].filter(g=>D[g.year]);
+
+function decode(){
+  const out={};
+  for(const y in D){
+    out[y]=D[y].map(dp=>({
+      info:dp.i,
+      rows:dp.r.map(r=>({section:V[r[0]],group:V[r[1]],gid:r[2],kgroup:V[r[3]],gubun:V[r[4]],
+        name:V[r[5]],credit:r[6],total:r[7],sem:r[8],range:V[r[9]],extra:!!r[10]})),
+      ncs:dp.n.map(r=>({subject:V[r[0]],unit:V[r[1]],code:r[2],sem:r[3],total:r[4],hours:r[5],level:r[6]})),
+      totals:dp.t}));
+  }
+  return out;
+}
+const DATA=decode();
+const SCHOOL=(DATA[GRADES[0].year][0]).info.school;
+const SITE=CONFIG.schoolYear+'학년도 '+CONFIG.siteName;
+document.getElementById('brandName').textContent=CONFIG.schoolYear+' '+CONFIG.brand;
+document.getElementById('brandSchool').textContent=SCHOOL;
+document.getElementById('pageTitle').textContent=SITE+' · '+SCHOOL;
+document.getElementById('footSchool').innerHTML='<b>'+SCHOOL+'</b> · '+SITE;
+
+const navHomeBtn = document.querySelector('[data-nav="home"]');
+if(navHomeBtn) navHomeBtn.textContent = '학년별 안내';
+
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const q1=s=>String(s).replace(/'/g,"\\'");
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const isChoice=sec=>/택\s*1/.test(sec)||/융합\s*\(/.test(sec);
+
+// 교육과정 데이터 보정: 원본 행을 일괄 삭제하지 않고, 확인 가능한 오류만 정밀 수정함.
+const normalizeNcsSubject = name => ({
+  '수출입관리':'수출입 관리',
+}[name] || name);
+for (const year of Object.keys(DATA)) {
+  for (const dept of DATA[year]) {
+    // NCS 과목명 띄어쓰기 및 이름 연결 오류를 정규화함.
+    dept.ncs.forEach(n => {
+      n.subject = normalizeNcsSubject(n.subject);
+      // 2026학년도 보건간호과에서 요양지원 NCS가 고객 관리로 연결된 오류를 바로잡음.
+      if (n.subject === '고객 관리' && /^06010108/.test(n.code) && /물품전달|환자이송지원|일상생활수행지원|신체청결지원|진료지원보조|오염물 처리/.test(n.unit)) {
+        n.subject = '요양 지원';
+      }
+    });
+    // 공동교육과정 중 학점과 학기 배정이 모두 0인 유령 행만 제외함.
+    dept.rows = dept.rows.filter(r => !(r.section === '공동교육과정' && !r.credit && !r.total && r.sem.every(v => v === 0)));
+    // 2026학년도 시각디자인과·모션그래픽디자인과의 후학습 지원형에 중복 삽입된 컴퓨터 그래픽 행을 제외함.
+    if (year === '2026' && ['시각디자인과','모션그래픽디자인과'].includes(dept.info.dept)) {
+      const hasCoreComputerGraphics = dept.rows.some(r => r.name === '컴퓨터 그래픽' && !/후학습/.test(r.section));
+      if (hasCoreComputerGraphics) dept.rows = dept.rows.filter(r => !(r.name === '컴퓨터 그래픽' && /후학습/.test(r.section)));
+    }
+    // 선택 과정 안에서 이름·학점·학기까지 완전히 같은 중복 행만 제거함.
+    const seenChoiceRows = new Set();
+    dept.rows = dept.rows.filter(r => {
+      if (!isChoice(r.section)) return true;
+      const key = JSON.stringify([r.section,r.group,r.gid,r.name,r.credit,r.total,r.sem]);
+      if (seenChoiceRows.has(key)) return false;
+      seenChoiceRows.add(key); return true;
+    });
+    // 후학습 지원형의 다른 선택과목도 원본에서 학점·학기가 0으로 비어 있어 화면에서 누락되지 않도록 기준 과목(독서와 작문)의 편성값을 보완함.
+    const postStudyRows = dept.rows.filter(r => /후학습/.test(r.section));
+    const postStudyRef = postStudyRows.find(r => r.name === '독서와 작문' && (r.total || r.credit));
+    if (postStudyRef) postStudyRows.forEach(r => {
+      if (!r.total && !r.credit && r.sem.every(v => v === 0)) {
+        r.credit = postStudyRef.credit;
+        r.total = postStudyRef.total;
+        r.sem = postStudyRef.sem.slice();
+      }
+    });
+    // 쇼핑라이브커머스과의 영상 제작 기초·방송 일반은 진로 선택과목인 보통교과로 분류.
+    if (year === '2027' && dept.info.dept === '쇼핑라이브커머스과') {
+      dept.rows.forEach(r => {
+        if (['영상 제작 기초','방송 일반'].includes(r.name)) r.section = '보통교과';
+      });
+    }
+  }
+  // 스토어기획과 서비스 마케팅 코스에서 누락된 자재 관리 NCS 능력단위를 같은 입학연도의 국제 물류 편성에서 보완함.
+  const store = DATA[year].filter(d => d.info.dept === '스토어기획과');
+  const service = store.find(d => d.info.course === '서비스 마케팅');
+  const logistics = store.find(d => d.info.course === '국제 물류');
+  if (service && logistics && !service.ncs.some(n => normalizeNcsSubject(n.subject) === '자재 관리')) {
+    service.ncs.push(...logistics.ncs.filter(n => normalizeNcsSubject(n.subject) === '자재 관리').map(n => ({...n, sem:n.sem.slice()})));
+  }
+}
+
+
+// 2027학년도 교육과정 길라잡이 수정 요청 반영: 2·3학년(입학연도 2026·2025)
+for (const year of ['2025','2026']) {
+  if (!DATA[year]) continue;
+  for (const dept of DATA[year]) {
+    const name = dept.info.dept;
+    if (name === '스마트IT경영과') {
+      // 선택과목 안내에서 두 번째 스토어기획과 과정(gid 110)을 제거.
+      dept.rows = dept.rows.filter(r => !(isChoice(r.section) && r.gid === 110 &&
+        /스토어기획과 물류와 전자 상거래 실무 과정/.test(r.group)));
+    }
+    if (name === '스토어기획과') {
+      // 과정 (1)(gid 107)은 제거하고, 과정 (2)(gid 110)의 이름과 과목을 수정.
+      dept.rows = dept.rows.filter(r => !(isChoice(r.section) && r.gid === 107));
+      dept.rows.forEach(r => {
+        if (isChoice(r.section) && r.gid === 110) {
+          r.group = '스마트IT경영과 국제 무역과 경영 실무 과정';
+        }
+      });
+      // 해당 과정의 창구 사무↔총무 표기를 3학년 학기별 개별 과목으로 분리.
+      const combined = dept.rows.filter(r => isChoice(r.section) && r.gid === 110 &&
+        r.name === '창구 사무↔총무');
+      for (const r of combined) {
+        const idx = dept.rows.indexOf(r);
+        dept.rows.splice(idx, 1,
+          {...r, name:'창구 사무', credit:4, total:4, sem:[0,0,0,0,4,0]},
+          {...r, name:'총무', credit:4, total:4, sem:[0,0,0,0,0,4]}
+        );
+      }
+    }
+    if (['시각디자인과','모션그래픽디자인과'].includes(name)) {
+      // 스토어기획과 물류와 전자 상거래 실무 과정의 과목은 선택과목 안내에 유지/복원.
+      // 창구 사무↔총무를 3학년 1·2학기 과목으로 분리.
+      const combined = dept.rows.filter(r => isChoice(r.section) && r.gid === 107 &&
+        r.name === '창구 사무↔총무');
+      for (const r of combined) {
+        const idx = dept.rows.indexOf(r);
+        dept.rows.splice(idx, 1,
+          {...r, name:'창구 사무', credit:4, total:4, sem:[0,0,0,0,4,0]},
+          {...r, name:'총무', credit:4, total:4, sem:[0,0,0,0,0,4]}
+        );
+      }
+    }
+  }
+}
+
+// 선택과목 안내: 스토어기획과·시각디자인과·모션그래픽디자인과의 국제 무역/물류 과정 과목 순서 통일.
+for (const year of ['2025','2026']) {
+  if (!DATA[year]) continue;
+  for (const dept of DATA[year]) {
+    if (!['스토어기획과','시각디자인과','모션그래픽디자인과'].includes(dept.info.dept)) continue;
+    const groups = ['스마트IT경영과 국제 무역과 경영 실무 과정','스토어기획과 물류와 전자 상거래 실무 과정'];
+    const order = ['창구 사무','총무','수출입 관리','회계 실무'];
+    const norm = name => String(name || '').replace(/\s/g, '');
+    for (const groupName of groups) {
+      const rows = dept.rows.filter(r => isChoice(r.section) && r.group === groupName);
+      if (rows.length < 2) continue;
+      const rank = name => { const i = order.findIndex(x => norm(x) === norm(name)); return i < 0 ? order.length : i; };
+      const sorted = rows.slice().sort((a,b) => rank(a.name)-rank(b.name));
+      let at = 0;
+      dept.rows = dept.rows.map(r => isChoice(r.section) && r.group === groupName ? sorted[at++] : r);
+    }
+  }
+}
+
+// 추가 수정: 선택과목 안내의 과목 순서를 정리하고, 디자인 계열의 스토어기획과 과정을 복원.
+for (const year of ['2025','2026']) {
+  if (!DATA[year]) continue;
+  const depts = DATA[year];
+  const storeDept = depts.find(d => d.info.dept === '스토어기획과');
+  for (const dept of depts) {
+    if (dept.info.dept === '스마트IT경영과') {
+      const order = ['창구 사무','총무','수출입 관리','회계 실무'];
+      const inGroup = dept.rows.filter(r => isChoice(r.section) && r.group === '스마트IT경영과 국제 무역과 경영 실무 과정');
+      const rank = name => { const i = order.indexOf(name); return i < 0 ? order.length : i; };
+      const sorted = inGroup.slice().sort((a,b) => rank(a.name)-rank(b.name));
+      let at = 0;
+      dept.rows = dept.rows.map(r => isChoice(r.section) && r.group === '스마트IT경영과 국제 무역과 경영 실무 과정' ? sorted[at++] : r);
+    }
+    if (['시각디자인과','모션그래픽디자인과'].includes(dept.info.dept) && storeDept) {
+      const groupName = '스토어기획과 물류와 전자 상거래 실무 과정';
+      const wanted = ['자재 관리','전자 상거래 실무','회계 실무'];
+      const existing = new Set(dept.rows.filter(r => isChoice(r.section) && r.group === groupName).map(r => r.name));
+      const templates = storeDept.rows.filter(r => isChoice(r.section) &&
+        r.group === '스마트IT경영과 국제 무역과 경영 실무 과정' && wanted.includes(r.name));
+      for (const subject of wanted) {
+        if (existing.has(subject)) continue;
+        const template = templates.find(r => r.name === subject);
+        if (!template) continue;
+        dept.rows.push({...template, group:groupName, gid:107, sem:template.sem.slice()});
+      }
+      // 과목은 요청한 순서대로 표시.
+      const rank = name => { const i = wanted.indexOf(name); return i < 0 ? wanted.length : i; };
+      const targetRows = dept.rows.filter(r => isChoice(r.section) && r.group === groupName);
+      const sorted = targetRows.slice().sort((a,b) => rank(a.name)-rank(b.name));
+      let at = 0;
+      dept.rows = dept.rows.map(r => isChoice(r.section) && r.group === groupName ? sorted[at++] : r);
+    }
+  }
+}
+
+function kind(r){
+  if(isChoice(r.section))return 'choice';
+  if(r.section.indexOf('보통교과')===0)return 'common';
+  if(r.section.indexOf('전문교과')===0)return 'major';
+  return 'extra';
+}
+const KCOLOR={common:'var(--common)',major:'var(--major)',choice:'var(--choice)',extra:'var(--extra)'};
+const KNAME={common:'보통교과',major:'전문교과',choice:'선택과목',extra:'그 밖의 과정'};
+const cleanSec=s=>s.replace(/\s*\(택\s*1\)/,'').trim();
+const firstGrade=sem=>{const i=sem.findIndex(v=>v>0);return i<0?0:Math.floor(i/2)+1;};
+
+const UNITS={};
+for(const y in DATA){
+  const m=[];
+  DATA[y].forEach(d=>{
+    let u=m.find(x=>x.dept===d.info.dept);
+    if(!u){u={year:y,dept:d.info.dept,info:d.info,courses:[]};m.push(u);}
+    u.courses.push(d);
+  });
+  UNITS[y]=m;
+}
+const courseKey=u=>'코스|'+u.year+'|'+u.dept;
+const activeIdx=u=>{
+  if(u.courses.length<2)return 0;
+  const p=S.picks[courseKey(u)];
+  const i=u.courses.findIndex(d=>d.info.course===p);
+  return i<0?0:i;
+};
+const active=u=>u.courses[activeIdx(u)];
+const chosenCourse=u=>u.courses.length<2?null:(S.picks[courseKey(u)]||u.courses[0].info.course);
+
+function courseDiff(u,i){
+  const others=u.courses.filter((_,j)=>j!==i);
+  // 선택/부전공 과목은 다른 과정의 필수 과목과 이름이 같더라도 비교 대상에서 제외함.
+  // 원본 데이터 행은 삭제하지 않아 과목 누락을 방지함.
+  return u.courses[i].rows.filter(r=>
+    !isChoice(r.section) && others.every(o=>!o.rows.some(x=>x.name===r.name && !isChoice(x.section))));
+}
+
+function rawChoices(d){
+  const secs=[];
+  d.rows.forEach(r=>{
+    if(!isChoice(r.section))return;
+    let s=secs.find(x=>x.name===r.section);
+    if(!s){s={name:r.section,opts:[]};secs.push(s);}
+    const k=r.group?'g'+r.gid:'r'+r.name;
+    let o=s.opts.find(x=>x.key===k);
+    if(!o){o={key:k,label:r.group||r.name,rows:[]};s.opts.push(o);}
+    o.rows.push(r);
+  });
+  secs.forEach(s=>{
+    const seen={},used={}; s.dup=false;
+    s.opts.forEach(o=>{seen[o.label]=(seen[o.label]||0)+1;});
+    s.opts.forEach(o=>{
+      const m=o.label.match(/^\((코스|융합)\)\s*/);
+      if(m){o.badge=m[1]==='코스'?'세부전공 코스':'다른 학과와 융합';o.label=o.label.slice(m[0].length);}
+      if(seen[o.label]>1){used[o.label]=(used[o.label]||0)+1;o.label+=' ('+used[o.label]+')';s.dup=true;}
+    });
+    const ref=s.opts.find(o=>sum(o.rows.map(r=>r.total||r.credit))>0);
+    s.opts.forEach(o=>{
+      o.credit=sum(o.rows.map(r=>r.total||r.credit));
+      o.sem=[0,0,0,0,0,0]; o.rows.forEach(r=>r.sem.forEach((v,i)=>o.sem[i]+=v));
+      o.assumed=false;
+      if(!o.credit&&ref){o.credit=ref.credit;o.sem=ref.sem.slice();o.assumed=true;}
+    });
+    s.same=s.opts.every(o=>o.credit===s.opts[0].credit);
+  });
+  return secs;
+}
+
+function sections(u){
+  const out=[];
+  if(u.courses.length>1){
+    const opts=u.courses.map((d,i)=>{
+      const rows=courseDiff(u,i);
+      const sem=[0,0,0,0,0,0]; rows.forEach(r=>r.sem.forEach((v,k)=>sem[k]+=v));
+      return {key:d.info.course,label:d.info.course,rows,sem,credit:sum(rows.map(r=>r.total||r.credit)),assumed:false};
+    });
+    const sem=[0,0,0,0,0,0]; opts.forEach(o=>o.sem.forEach((v,k)=>sem[k]+=v));
+    out.push({name:'전공 코스',key:courseKey(u),opts,grade:firstGrade(sem),isCourse:true,
+      same:opts.every(o=>o.credit===opts[0].credit),dup:false});
+  }
+  const d=active(u);
+  rawChoices(d).forEach(s=>{
+    const sem=[0,0,0,0,0,0]; s.opts.forEach(o=>o.sem.forEach((v,k)=>sem[k]+=v));
+    s.key='택1|'+u.year+'|'+u.dept+'|'+(u.courses.length>1?d.info.course:'')+'|'+s.name;
+    s.grade=firstGrade(sem);
+    out.push(s);
+  });
+  return out;
+}
+const activeSecs=u=>sections(u).filter(s=>s.grade>0);
+const unsetOf=u=>sections(u).filter(s=>s.grade===0);
+const hiddenSecs=u=>new Set(unsetOf(u).map(s=>s.name));
+const visibleRows=u=>{const h=hiddenSecs(u);return active(u).rows.filter(r=>!h.has(r.section));};
+
+let S={view:'home',year:null,ui:0,tab:'overview',picks:{},q:'',filter:'all',sheet:null};
+
+function readHash(){
+  const h=location.hash.replace(/^#\/?/,'').split('/');
+  if(h[0]==='glossary'){S.view='glossary';return;}
+  if(h[0]==='year'&&UNITS[h[1]]){S.view='depts';S.year=h[1];
+    if(h[2]!==undefined&&UNITS[h[1]][+h[2]]){S.view='dept';S.ui=+h[2];S.tab=h[3]||'overview';}
+    return;}
+  S.view='home';
+}
+const go=h=>{location.hash=h;};
+const crumb=(items,cur)=>`<div class="crumb">${items.map(([h,t])=>`<button onclick="go('${h}')">${esc(t)}</button><i>›</i>`).join('')}<span>${esc(cur)}</span></div>`;
+const nameBtn=n=>`<button class="namebtn" onclick="openSub('${esc(q1(n))}')">${esc(n)}</button>`;
+
+function openSub(name){S.sheet=name;renderSheet();}
+function closeSub(){S.sheet=null;renderSheet();}
+function renderSheet(){
+  const el=document.getElementById('sheet');
+  if(!S.sheet){el.innerHTML='';return;}
+  const name=S.sheet;
+  const u=(S.view==='dept')?UNITS[S.year][S.ui]:null;
+  const d=u?active(u):null;
+  const rows=d?d.rows.filter(x=>x.name===name):[];
+  const r=rows[0]||null;
+  const desc=DESC[name]||DESC[normalizeNcsSubject(name)]||[];
+  const aliases = name==='창구 사무↔총무' ? ['창구 사무','총무'] : (name==='총무↔인사' ? ['총무','인사'] : [normalizeNcsSubject(name)]);
+  const units=d?d.ncs.filter(x=>aliases.includes(normalizeNcsSubject(x.subject))):[];
+  const tags=rows.map(row=>{
+    const k=kind(row); const out=[
+      '<span class="tag" style="background:'+KCOLOR[k]+'">'+KNAME[k]+'</span>'
+    ];
+    if(row.kgroup)out.push('<span class="tag" style="background:#EEF2F9;color:var(--ink2)">'+esc(row.kgroup)+'</span>');
+    if(row.gubun)out.push('<span class="tag" style="background:#EEF2F9;color:var(--ink2)">'+esc(row.gubun)+'</span>');
+    return '<div style="display:flex;gap:5px;flex-wrap:wrap;margin:4px 0">'+out.join('')+'</div>';
+  }).join('');
+  const creditDetails=rows.map(row=>{
+    const when=row.sem.map((v,i)=>v?SEMS[i]+' '+v+'학점':null).filter(Boolean);
+    const cr=row.total||row.credit;
+    return '<div style="padding:9px 0;border-top:1px solid var(--line)"><div style="font-size:13px;color:var(--muted);margin-bottom:4px">'+esc(row.section)+'</div>'+
+      (cr?'<div>이수학점 <b style="color:var(--ink)">'+cr+'학점</b></div>':'')+
+      (when.length?'<div style="font-size:13px;color:var(--muted);margin-top:3px">'+when.join(', ')+'</div>':'')+'</div>';
+  }).join('');
+  el.innerHTML='<div class="scrim" onclick="if(event.target===this)closeSub()"><div class="sheet" role="dialog" aria-modal="true" style="position:relative">'+
+    '<button class="close" onclick="closeSub()" aria-label="닫기" style="font-size:22px;color:var(--muted);line-height:1">×</button>'+tags+'<h3>'+esc(name)+'</h3>'+ 
+    '<div class="body">'+(desc.length?desc.map(p=>'<p>'+esc(p)+'</p>').join(''):'<p>아직 설명이 등록되지 않았어요.</p>')+'</div>'+ 
+    (units.length?'<div class="meta">이 과목에서 배우는 능력단위 '+units.length+'개예요. 회사에서 실제로 하는 일의 단위랍니다.<ul class="units">'+units.map(x=>'<li>'+esc(x.unit)+'<span>'+(x.total?x.total+'학점':'')+'</span></li>').join('')+'</ul></div>':'')+
+    (rows.length?'<div class="meta">'+creditDetails+'</div>':'')+
+    '<button class="sheetbtn" onclick="closeSub()">닫기</button></div></div>';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.sheet)closeSub();});
+
+function viewHome(){
+  const cards=GRADES.map(g=>{
+    const us=UNITS[g.year];
+    const fresh=false;
+    return `<button class="gcard" onclick="go('#/year/${g.year}')">
+      <div class="badge" style="background:${g.color}">${g.g}</div>
+      <div class="n">${g.g}학년</div>
+      <div class="sub">${g.year}학년도 입학${fresh?' 예정':''}</div>
+      <div class="map">적용 교육과정: <b>${g.year}학년도</b> 편제표</div>
+      <div class="map" style="margin-top:8px;background:#EEF2F9;color:var(--ink);font-weight:600">학과별 교육과정 보기 ›</div>
+      <div class="depts">${[...new Set(us.map(u=>u.dept))].map(n=>`<span class="pill">${esc(n)}</span>`).join('')}</div>
+    </button>`;
+  }).join('');
+
+  return `<p class="eyebrow">${esc(SCHOOL)}</p>
+  <h1>${esc(SITE)}</h1>
+  <p class="lead">우리 학교에서 3년 동안 배우는 과목과 교육과정 구성을 안내하는 곳이에요. 교육과정은 입학한 해를 기준으로 3년 내내 적용되니, 내 학년을 누르면 우리 학과의 모든 과목을 확인할 수 있어요.</p>
+  <h2 style="margin-top:6px">${CONFIG.schoolYear}학년도 기준 학년 선택</h2>
+  <p class="hint" style="margin-top:-6px">${CONFIG.schoolYear}년 3월 기준 학년을 선택해 주세요.</p>
+  <div class="grades">${cards}</div>
+
+  <h2>졸업까지 채우는 학점</h2>
+  <div class="facts">
+    <div class="fact"><div class="v">192학점</div><div class="k">3년 동안 채우는 전체</div></div>
+    <div class="fact"><div class="v">174학점</div><div class="k">교과 (보통 + 전문)</div></div>
+    <div class="fact"><div class="v">18학점</div><div class="k">창의적 체험활동</div></div>
+    <div class="fact"><div class="v">32학점</div><div class="k">한 학기에 듣는 양</div></div>
+  </div>
+  <div class="tip">1학점은 한 학기에 16번 수업을 듣는 양이에요. 4학점 과목이면 일주일에 네 시간씩 한 학기를 배우는 셈이죠.</div>
+  <p class="lead" style="margin-top:24px">낯선 말이 보이면 <button class="link" onclick="go('#/glossary')">용어 사전</button>을 먼저 열어보세요.</p>`;
+}
+
+function viewDepts(){
+  const y=S.year, g=GRADES.find(x=>x.year===y);
+  const cards=UNITS[y].map((u,i)=>{
+    const secs=activeSecs(u);
+    return `<button class="dcard" onclick="go('#/year/${y}/${i}')">
+      <div class="t">${esc(u.dept)}</div>
+      <div class="c">${u.courses.length>1?u.courses.map(d=>esc(d.info.course)).join(' / ')+' 코스':'단일 교육과정으로 함께 배워요'}</div>
+      <div class="meta">${secs.length ? '선택·코스 과정: '+esc(secs.map(s=>cleanSec(s.name)).join(', ')) : '3년 전체 학기별 편제 안내'}</div>
+    </button>`;
+  }).join('');
+  return `${crumb([['#/','학년별 안내']],CONFIG.schoolYear+'학년도 '+g.g+'학년')}
+    <h1>${g.g}학년 학과별 교육과정</h1>
+    <p class="lead">학과를 누르면 3년 동안 배우는 보통교과·전문교과와 세부 코스 구성을 한눈에 볼 수 있어요.</p>
+    <div class="dlist">${cards}</div>`;
+}
+
+const TABS=[['overview','한눈에 보기'],['roadmap','학기별로 보기'],['choice','선택과목 안내'],['table','전체 편제표'],['ncs','실무과목 속내용']];
+function viewDept(){
+  const y=S.year,u=UNITS[y][S.ui],g=GRADES.find(x=>x.year===y),d=active(u);
+  const tabs=TABS.filter(t=>t[0]!=='ncs'||d.ncs.length)
+    .map(([k,l])=>`<button class="${S.tab===k?'on':''}" onclick="setTab('${k}')">${l}</button>`).join('');
+  const body={overview:tabOverview,roadmap:tabRoadmap,choice:tabChoice,table:tabTable,ncs:tabNcs}[S.tab](u);
+  return `${crumb([['#/','학년별 안내'],['#/year/'+y,CONFIG.schoolYear+'학년도 '+g.g+'학년']],u.dept)}
+    <h1>${esc(u.dept)}</h1>
+    <p class="lead">${CONFIG.schoolYear}학년도 ${g.g}학년(${y}학년도 입학생)이 이수하는 교육과정이에요.${(u.info.jobs&&u.info.jobs.length)?' 졸업 후에는 주로 '+u.info.jobs.map(esc).join(', ')+' 분야로 진출해요.':''}</p>
+    ${courseBar(u)}
+    <div class="tabs">${tabs}</div>${body}`;
+}
+function setTab(t){S.tab=t;go('#/year/'+S.year+'/'+S.ui+'/'+t);}
+
+function courseBar(u){
+  if(u.courses.length<2 || ['스마트IT경영과','스토어기획과'].includes(u.dept))return '';
+  const cur=chosenCourse(u);
+  return `<div class="locked" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <b>전공 코스별 보기</b>
+    <span style="font-size:13.5px;color:var(--muted)">코스를 누르면 해당 코스의 학기별 과목과 편제표를 확인할 수 있어요.</span>
+    <span style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">
+      ${u.courses.map(d=>`<button class="chip${cur===d.info.course?' on':''}" onclick="setCourse('${esc(q1(d.info.course))}')">${esc(d.info.course)}</button>`).join('')}
+    </span></div>`;
+}
+function setCourse(c){
+  const u=UNITS[S.year][S.ui];
+  S.picks[courseKey(u)]=c; render();
+}
+
+function tabOverview(u){
+  const d=active(u),t=d.totals;
+  const c=t['보통교과 이수 합계'],m=t['전문교과 이수 합계'],a=t['교과 총 이수 합계'];
+  const cT=c?c[1]:0,mT=m?m[1]:0,aT=a?a[1]:cT+mT,cR=c?c[2]:0,mR=m?m[2]:0;
+  const semRow=a?a[0].map((v,i)=>`<div class="sem"><div class="hd"><b>${SEMS[i]}</b><em>${v}학점</em></div>
+    <div style="font-size:13px;color:var(--muted)">보통교과 ${c?c[0][i]:0} · 전문교과 ${m?m[0][i]:0}</div></div>`).join(''):'';
+  const secs=activeSecs(u);
+  return `<div class="panel"><h3>학점이 이렇게 나뉘어요</h3>
+    <p class="hint">교과 ${aT}학점에 창의적 체험활동 18학점을 더하면 192학점, 그러면 졸업이에요. 괄호 안은 반드시 채워야 하는 최소 학점이에요.</p>
+    <div class="stack"><div style="flex:${cT};background:var(--common)">보통교과 ${cT}</div><div style="flex:${mT};background:var(--major)">전문교과 ${mT}</div></div>
+    <div class="legend"><span><i class="dot" style="background:var(--common)"></i>보통교과 ${cT}학점 (최소 ${cR})</span>
+      <span><i class="dot" style="background:var(--major)"></i>전문교과 ${mT}학점 (최소 ${mR})</span></div></div>
+
+  <div class="panel"><h3>학기마다 듣는 양은 같아요</h3>
+    <p class="hint">여섯 학기 모두 교과 ${a?a[0][0]:29}학점씩이에요. 여기에 창의적 체험활동 3학점이 붙어서 한 학기 32학점이 돼요.</p>
+    <div class="sems">${semRow}</div></div>
+
+  <div class="panel"><h3>선택·코스 과정 안내</h3>
+    ${secs.length?`<p class="hint">이 교육과정에는 아래와 같은 코스 및 선택과목 과정이 편성되어 있어요.</p>
+      <ul style="list-style:none;padding:0;margin:0 0 18px">${secs.map(s=>`<li style="padding:10px 0;border-top:1px solid var(--line);font-size:14.5px">
+        <b>${esc(cleanSec(s.name))}</b> — ${s.opts.length}개 과정 중 택1
+        <span style="color:var(--muted)"> · ${s.grade}학년 과정 (${s.opts.map(o=>esc(o.label)).join(', ')})</span></li>`).join('')}</ul>
+      <button class="chip on" onclick="setTab('choice')">선택과목 자세히 보기</button>`
+      :`<p class="hint">별도의 선택 묶음 없이 공통 편제된 과목들을 이수해요.</p>`}
+  </div>`;
+}
+
+function tabRoadmap(u){
+  const d=active(u), vis=visibleRows(u);
+  const totRow=d.totals['교과 총 이수 합계'];
+  const cols=SEMS.map((label,i)=>{
+    const fixed=vis.filter(r=>!isChoice(r.section)&&!r.extra&&r.sem[i]>0);
+    const choiceRows=vis.filter(r=>isChoice(r.section)&&!r.extra&&r.sem[i]>0);
+    const tot=totRow?totRow[0][i]:sum(fixed.map(r=>r.sem[i]));
+    const fixedHtml=fixed.sort((x,y)=>y.sem[i]-x.sem[i])
+      .map(r=>`<button class="sub" onclick="openSub('${esc(q1(r.name))}')">
+        <i class="tick" style="background:${KCOLOR[kind(r)]}"></i><span>${esc(r.name)}</span><span class="cr">${r.sem[i]}</span></button>`).join('');
+    let choiceHtml='';
+    if(choiceRows.length){
+      const bySec={};
+      choiceRows.forEach(r=>{(bySec[r.section]=bySec[r.section]||[]).push(r);});
+      choiceHtml=Object.entries(bySec).map(([sec,list])=>{
+        const uniq=[];
+        list.forEach(r=>{if(!uniq.some(x=>x.name===r.name))uniq.push(r);});
+        return `<div style="margin-top:8px;padding:8px;border-radius:12px;background:#FFF8EE;border:1px dashed #EFC286">
+          <div style="font-size:12.5px;font-weight:700;color:#8A5A17;margin-bottom:6px;padding:0 4px">${esc(cleanSec(sec))} (선택)</div>
+          ${uniq.map(r=>`<button class="sub pick" style="margin-bottom:4px" onclick="openSub('${esc(q1(r.name))}')">
+            <i class="tick" style="background:var(--choice)"></i><span>${esc(r.name)}</span><span class="cr">${r.sem[i]}</span></button>`).join('')}
+        </div>`;
+      }).join('');
+    }
+    return `<div class="sem"><div class="hd"><b>${label}</b><em>${tot}학점</em></div>${(fixedHtml+choiceHtml)||'<div style="font-size:13px;color:var(--muted)">편성 없음</div>'}</div>`;
+  }).join('');
+  return `<div class="panel"><h3>3년을 여섯 학기로 펼쳐봤어요</h3>
+    <p class="hint">${u.courses.length>1?`<b>${esc(active(u).info.course)}</b> 코스 기준이에요. `:''}과목을 누르면 어떤 걸 배우는지 볼 수 있어요. 노란색 점선 칸은 해당 학기에 운영되는 선택과목 후보들이에요.</p>
+    <div class="sems">${cols}</div>
+    <div class="legend" style="margin-top:16px">
+      <span><i class="dot" style="background:var(--common)"></i>보통교과</span>
+      <span><i class="dot" style="background:var(--major)"></i>전문교과</span>
+      <span><i class="dot" style="background:var(--choice)"></i>선택과목</span></div></div>`;
+}
+
+function optCard(s,o){
+  const li=o.rows.map(r=>`<li><span>${esc(r.name)}</span><b>${(r.total||r.credit)||(o.assumed?o.credit:0)}학점</b></li>`).join('');
+  const when=o.sem.map((v,i)=>v?SEMS_S[i]:null).filter(Boolean).join(', ');
+  return `<div class="opt">
+    <div>
+      <div class="t">${esc(o.label)}</div>
+      ${o.badge?`<div style="margin-top:7px"><span class="tag" style="background:${o.badge==='세부전공 코스'?'var(--major)':'var(--ncs)'}">${o.badge}</span></div>`:''}
+    </div>
+    <ul>${li}</ul>
+    <div class="foot">모두 ${o.credit}학점 · ${when||'편성 학기 미정'}${o.assumed?' (학교 편성 기준 학점)':''}</div>
+    <div style="margin-top:10px;font-size:13px">${o.rows.map(r=>nameBtn(r.name)).join(' · ')}</div>
+  </div>`;
+}
+
+function tabChoice(u){
+  const secs=activeSecs(u);
+  if(!secs.length){
+    return `<div class="panel"><h3>선택과목 안내</h3>
+      <p class="hint">이 학과는 별도로 갈라지는 선택과목 묶음 없이 단일 과정으로 과목이 편성되어 있어요.</p>
+      <p class="hint" style="margin-top:18px"><button class="link" onclick="setTab('roadmap')">학기별로 보기</button>에서 3년 전체 흐름을 볼 수 있어요.</p></div>`;
+  }
+  const blocks=secs.map(s=>`<div class="panel">
+    <h3>${esc(cleanSec(s.name))}
+      <span style="font-weight:600;color:var(--muted);font-size:15px">${s.grade}학년 과정</span></h3>
+    <p class="hint">${s.opts.length}개 과정 중 하나를 이수하게 돼요.${s.isCourse?' 코스에 따라 2학년 2학기부터 배우는 전공과목이 달라져요.':''}${s.same?' 어느 과정을 이수하든 총 학점 수는 같아요.':''}
+      과목 이름을 누르면 어떤 걸 배우는지 볼 수 있어요.</p>
+    <div class="opts">${s.opts.map(o=>optCard(s,o)).join('')}</div></div>`).join('');
+  return blocks;
+}
+
+function tabTable(u){
+  const d=active(u), q=S.q.trim(), all=visibleRows(u);
+  const rows=all.filter(r=>(S.filter==='all'||kind(r)===S.filter)&&(!q||(r.name+r.kgroup+r.section+r.gubun).includes(q)));
+  let last='';
+  const body=rows.map(r=>{
+    const head=(r.section+'|'+r.group)!==last; last=r.section+'|'+r.group;
+    const k=kind(r);
+    const hr=head?`<tr class="grp"><td colspan="10"><span class="tag" style="background:${KCOLOR[k]}">${KNAME[k]}</span> ${esc(r.section)}${r.group?' · '+esc(r.group):''}</td></tr>`:'';
+    return hr+`<tr class="row"><td>${esc(r.kgroup)}</td><td>${esc(r.gubun)}</td><td>${nameBtn(r.name)}</td>
+      <td class="num">${r.total||r.credit||'·'}</td>
+      ${r.sem.map(v=>`<td class="num" style="${v?'font-weight:700':'color:#C9D3E0'}">${v||'·'}</td>`).join('')}</tr>`;
+  }).join('');
+  const chips=[['all','전체'],['common','보통교과'],['major','전문교과'],['choice','선택과목'],['extra','그 밖']]
+    .filter(([k])=>k==='all'||all.some(r=>kind(r)===k))
+    .map(([k,l])=>`<button class="chip${S.filter===k?' on':''}" onclick="setFilter('${k}')">${l}</button>`).join('');
+  return `<div class="panel"><h3>전체 편제표</h3>
+    <p class="hint">${u.courses.length>1?`<b>${esc(d.info.course)}</b> 코스 기준이에요. `:''}우리 학과가 3년 동안 배우는 과목 전부예요. 숫자는 그 학기에 듣는 학점이고, 과목 이름을 누르면 설명이 나와요.</p>
+    <div class="tools"><input id="q" placeholder="과목 이름 찾기" value="${esc(S.q)}" oninput="setQ(this.value)">${chips}</div>
+    <div class="tw"><table><thead><tr><th>교과(군)</th><th>구분</th><th>과목</th><th class="num">이수</th>
+    ${SEMS_S.map(s=>`<th class="num">${s}</th>`).join('')}</tr></thead>
+    <tbody>${body||'<tr><td colspan="10" style="color:var(--muted)">찾는 과목이 없어요. 다른 이름으로 찾아보세요.</td></tr>'}</tbody></table></div>
+    <p class="hint" style="margin:14px 0 0">모두 ${rows.length}개 과목</p></div>`;
+}
+function setQ(v){S.q=v;render();const el=document.getElementById('q');if(el){el.focus();el.setSelectionRange(v.length,v.length);}}
+function setFilter(k){S.filter=k;render();}
+
+function tabNcs(u){
+  const d=active(u), by={};
+  d.ncs.forEach(r=>{(by[r.subject]=by[r.subject]||[]).push(r);});
+  const blocks=Object.entries(by).map(([sub,list])=>{
+    const desc=DESC[sub]?DESC[sub][0]:'';
+    return `<div class="panel"><h3>${nameBtn(sub)} <span style="font-weight:600;color:var(--muted);font-size:14px">${sum(list.map(r=>r.total))}학점</span></h3>
+      ${desc?`<p class="hint">${esc(desc)}</p>`:''}
+      <div class="tw"><table style="min-width:600px"><thead><tr><th>능력단위</th><th>코드</th><th class="num">학점</th>
+      ${SEMS_S.map(s=>`<th class="num">${s}</th>`).join('')}</tr></thead><tbody>
+      ${list.map(r=>`<tr class="row"><td style="font-weight:600">${esc(r.unit)}</td><td style="color:var(--muted);font-size:12.5px">${esc(r.code)}</td>
+        <td class="num">${r.total||'·'}</td>
+        ${r.sem.map(v=>`<td class="num" style="${v?'font-weight:700':'color:#C9D3E0'}">${v||'·'}</td>`).join('')}</tr>`).join('')}
+      </tbody></table></div></div>`;
+  }).join('');
+  return `<div class="panel"><h3>실무과목은 '능력단위'로 배워요</h3>
+    <p class="hint">전공실무 과목은 회사에서 실제로 하는 일을 잘게 나눈 단위를 그대로 가져와 배워요. 그래서 여기 적힌 내용이 자격증 시험과 취업 면접에서 그대로 쓰여요.</p></div>${blocks}`;
+}
+
+const TERMS=[
+ ['학점','한 학기에 16번 수업을 듣는 양이 1학점이에요. 4학점 과목이면 일주일에 네 시간씩 한 학기를 배워요.','3년 동안 192학점을 채우면 졸업이에요. 교과 174학점에 창의적 체험활동 18학점이죠.'],
+ ['기준학점과 운영학점','기준학점은 나라에서 정해 둔 기본값이고, 운영학점은 학교가 범위 안에서 조절한 실제 학점이에요.','편제표에 "3~5"처럼 적힌 게 조절할 수 있는 범위예요.'],
+ ['이수학점','실제로 그 과목을 듣고 인정받는 학점이에요. 편제표 오른쪽 숫자가 그거예요.'],
+ ['필수 이수학점','반드시 채워야 하는 최소한의 학점이에요. 보통교과 64학점, 전문교과 80학점이 기준이에요.'],
+ ['보통교과','국어·수학·영어·사회·과학·체육·예술·정보처럼 모든 고등학생이 배우는 과목이에요.','공통과목, 일반선택, 진로선택, 융합선택으로 나뉘어요.'],
+ ['전문교과','학과 전공을 배우는 과목이에요. 직업계고 학생이 다 듣는 전문공통, 전공 이론인 전공일반, 실습 위주인 전공실무가 있어요.'],
+ ['전공일반과 전공실무','전공일반은 전공의 기본 개념을 배우고, 전공실무는 현장에서 하는 일을 그대로 실습해요.','전공실무는 대체로 2·3학년에 몰려 있어요.'],
+ ['능력단위 (NCS)','회사에서 한 사람이 해내야 하는 일을 잘게 나눈 단위예요. 전공실무 과목은 이걸 묶어서 만들어요.','예를 들어 "회계 실무"는 전표관리, 자금관리, 원가계산, 결산처리로 이뤄져 있어요.'],
+ ['전공 코스','같은 학과 안에서 진로에 따라 갈라지는 길이에요. 코스에 따라 배우는 전공과목이 달라져요.'],
+ ['세부전공 코스형','같은 학과 안에서 진로에 따라 갈라지는 심화 코스예요. 주로 2학년 2학기나 3학년 실무과목이 달라져요.'],
+ ['타학과 융합형','다른 학과의 전공과목을 묶어서 듣는 방식이에요. 내 전공에 다른 분야를 더할 수 있도록 구성된 과정이에요.'],
+ ['부전공 이수형','주전공 말고 다른 분야를 한 묶음 더 배우는 방식이에요.'],
+ ['후학습 지원형','졸업하고 나서 대학이나 이어지는 공부를 준비할 수 있게 넣어 둔 보통교과 선택과목이에요.'],
+ ['공동교육과정','우리 학교에 없는 과목을 다른 학교나 공동실습소에서 듣는 방식이에요. 방과후나 주말에 하는 경우가 많아요.'],
+ ['창의적 체험활동','자율·자치활동, 동아리활동, 진로활동이에요. 3년 동안 18학점, 시간으로는 288시간을 채워요.'],
+ ['공통·일반선택·진로선택·융합선택','공통과목은 1학년에 다 같이 들어요. 일반선택은 교과의 기본, 진로선택은 진로에 맞춘 심화, 융합선택은 여러 교과를 엮은 과목이에요.'],
+];
+function viewGlossary(){
+  return `${crumb([['#/','학년별 안내']],'용어 사전')}
+    <h1>낯선 말들, 짧게 풀었어요</h1>
+    <p class="lead">편제표에 나오는 말이 어렵게 느껴질 때 여기서 찾아보세요.</p>
+    <div class="terms">${TERMS.map(t=>`<div class="term"><h3>${esc(t[0])}</h3>${t.slice(1).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`).join('')}</div>
+    <div class="tip" style="margin-top:24px"><b>교육과정을 볼 때 이 세 가지를 확인해 보세요.</b><br>
+      하나, 내가 관심 있는 진로·직무와 어떻게 이어지는가.<br>둘, 어느 학기에 배우는가.<br>셋, 몇 학점인가.<br>
+      셋 다 학과 페이지에서 한눈에 볼 수 있어요.</div>`;
+}
+
+function render(){
+  document.getElementById('app').innerHTML=
+    S.view==='home'?viewHome():S.view==='depts'?viewDepts():S.view==='dept'?viewDept():viewGlossary();
+  document.querySelectorAll('.top nav button').forEach(b=>b.classList.toggle('on',(b.dataset.nav==='glossary')===(S.view==='glossary')));
+  renderSheet();
+}
+document.querySelectorAll('.top nav button').forEach(b=>{b.onclick=()=>{S.sheet=null;go(b.dataset.nav==='glossary'?'#/glossary':'#/');}});
+window.addEventListener('hashchange',()=>{S.sheet=null;readHash();render();window.scrollTo(0,0);});
+readHash();render();
+</script>
+</body>
+</html>
